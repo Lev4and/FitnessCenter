@@ -1,1 +1,21 @@
-﻿@RenderBody()
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    @await Html.PartialAsync("MetatagsPartial")
+    @await Html.PartialAsync("TitlePartial")
+    @await Html.PartialAsync("IconPartial")
+    @await Html.PartialAsync("CssPartial")
+</head>
+<body>
+    <div class="wrapper">
+        @await Html.PartialAsync("NavBarPartial")
+        <div class="main app form" id="main">
+            @RenderBody()
+            @await Html.PartialAsync("SubscribeFormPartial")
+            @await Html.PartialAsync("FooterPartial")
+        </div>
+        <a id="back-top" class="back-to-top page-scroll" href="#main"> <i class="ion-ios-arrow-thin-up"></i> </a>
+    </div>
+    @await Html.PartialAsync("ScriptsPartial")
+</body>
+</html>
