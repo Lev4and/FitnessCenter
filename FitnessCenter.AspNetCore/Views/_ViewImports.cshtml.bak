@@ -1,0 +1,3 @@
+﻿@using FitnessCenter.AspNetCore
+@using FitnessCenter.AspNetCore.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers

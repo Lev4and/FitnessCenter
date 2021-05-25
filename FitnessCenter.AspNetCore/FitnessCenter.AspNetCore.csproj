@@ -1,15 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-
+<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.jQuery.Unobtrusive.Ajax" Version="3.2.6" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\FitnessCenter.Model\FitnessCenter.Model.csproj" />
+    <PackageReference Include="DevExtreme.AspNet.Core" Version="20.1.4" />
+    <PackageReference Include="DevExtreme.AspNet.Data" Version="2.6.1" />
   </ItemGroup>
-
 </Project>

@@ -17,7 +17,7 @@ namespace FitnessCenter.AspNetCore
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
