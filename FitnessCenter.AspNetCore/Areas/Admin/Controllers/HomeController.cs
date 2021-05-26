@@ -7,8 +7,14 @@ namespace FitnessCenter.AspNetCore.Areas.Admin.Controllers
     {
         [Route("~/Admin")]
         [Route("~/Admin/Home")]
-        [Route("~/Admin/Home/Index")]
-        public IActionResult Index()
+        [Route("~/Admin/Home/Analytics")]
+        public IActionResult Analytics()
+        {
+            return View();
+        }
+
+        [Route("~/Admin/Home/Sales")]
+        public IActionResult Sales()
         {
             return View();
         }

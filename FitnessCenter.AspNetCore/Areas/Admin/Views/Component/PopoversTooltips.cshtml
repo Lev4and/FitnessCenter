@@ -1,0 +1,91 @@
+﻿<div class="page-wrapper">
+	<div class="page-content-wrapper">
+		<div class="page-content">
+			<div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
+				<div class="breadcrumb-title pr-3">Components</div>
+				<div class="pl-3">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb mb-0 p-0">
+							<li class="breadcrumb-item"><a href="javascript:;"><i class='bx bx-home-alt'></i></a>
+							</li>
+							<li class="breadcrumb-item active" aria-current="page">Popovers</li>
+						</ol>
+					</nav>
+				</div>
+				<div class="ml-auto">
+					<div class="btn-group">
+						<button type="button" class="btn btn-light">Settings</button>
+						<button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">	<span class="sr-only">Toggle Dropdown</span>
+						</button>
+						<div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">	<a class="dropdown-item" href="javascript:;">Action</a>
+							<a class="dropdown-item" href="javascript:;">Another action</a>
+							<a class="dropdown-item" href="javascript:;">Something else here</a>
+							<div class="dropdown-divider"></div>	<a class="dropdown-item" href="javascript:;">Separated link</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card radius-15">
+				<div class="card-body">
+					<div class="card-title">
+						<h4 class="mb-0">Basic popovers</h4>
+					</div>
+					<hr/>
+					<button type="button" class="btn btn-lg btn-light" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
+				</div>
+			</div>
+			<div class="card radius-15">
+				<div class="card-body">
+					<div class="card-title">
+						<h4 class="mb-0">Four Directions</h4>
+					</div>
+					<hr/>
+					<button type="button" class="btn btn-light" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">Popover on top</button>
+					<button type="button" class="btn btn-light" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">Popover on right</button>
+					<button type="button" class="btn btn-light" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus
+					  sagittis lacus vel augue laoreet rutrum faucibus.">Popover on bottom</button>
+					<button type="button" class="btn btn-light" data-container="body" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">Popover on left</button>
+				</div>
+			</div>
+			<div class="card radius-15">
+				<div class="card-body">
+					<div class="card-title">
+						<h4 class="mb-0">Dismiss on next click</h4>
+					</div>
+					<hr/>	<a tabindex="0" class="btn btn-lg btn-light" role="button" data-toggle="popover" data-trigger="focus" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">Dismissible
+						popover</a>
+				</div>
+			</div>
+			<div class="card radius-15">
+				<div class="card-body">
+					<div class="card-title">
+						<h4 class="mb-0">Disabled elements</h4>
+					</div>
+					<hr/>	<span class="d-inline-block" data-toggle="popover" data-content="Disabled popover">
+						<button class="btn btn-primary" style="pointer-events: none;" type="button"
+							disabled>Disabled button</button>
+					</span>
+				</div>
+			</div>
+			<div class="card radius-15">
+				<div class="card-body">
+					<div class="card-title">
+						<h4 class="mb-0">Tooltips examples</h4>
+					</div>
+					<hr/>
+					<button type="button" class="btn btn-light" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Tooltip on top</button>
+					<button type="button" class="btn btn-light" data-toggle="tooltip" data-placement="right" title="Tooltip on right">Tooltip on right</button>
+					<button type="button" class="btn btn-light" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">Tooltip on bottom</button>
+					<button type="button" class="btn btn-light" data-toggle="tooltip" data-placement="left" title="Tooltip on left">Tooltip on left</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+@section ScriptPage {
+	<script>
+		$(function () {
+			$('[data-toggle="popover"]').popover()
+		})
+	</script>
+}

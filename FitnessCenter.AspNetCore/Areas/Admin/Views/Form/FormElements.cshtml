@@ -1,0 +1,267 @@
+﻿@section StylePage{
+	<link rel="stylesheet" href="~/plugins/input-tags/css/tagsinput.css" />
+}
+<div class="page-wrapper">
+	<div class="page-content-wrapper">
+		<div class="page-content">
+			<div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
+				<div class="breadcrumb-title pr-3">Forms</div>
+				<div class="pl-3">
+					<nav aria-label="breadcrumb">
+						<ol class="breadcrumb mb-0 p-0">
+							<li class="breadcrumb-item"><a href="javascript:;"><i class='bx bx-home-alt'></i></a>
+							</li>
+							<li class="breadcrumb-item active" aria-current="page">Elements</li>
+						</ol>
+					</nav>
+				</div>
+				<div class="ml-auto">
+					<div class="btn-group">
+						<button type="button" class="btn btn-light">Settings</button>
+						<button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">	<span class="sr-only">Toggle Dropdown</span>
+						</button>
+						<div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">	<a class="dropdown-item" href="javascript:;">Action</a>
+							<a class="dropdown-item" href="javascript:;">Another action</a>
+							<a class="dropdown-item" href="javascript:;">Something else here</a>
+							<div class="dropdown-divider"></div>	<a class="dropdown-item" href="javascript:;">Separated link</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card radius-15">
+				<div class="card-body">
+					<div class="card-title">
+						<h4 class="mb-0">Text Inputs</h4>
+					</div>
+					<hr/>
+					<div class="form-group">
+						<input class="form-control form-control-lg" type="text" placeholder=".form-control-lg">
+					</div>
+					<div class="form-group">
+						<input class="form-control" type="text" placeholder="Default input">
+					</div>
+					<div class="form-group">
+						<input class="form-control form-control-sm" type="text" placeholder=".form-control-sm">
+					</div>
+					<div class="form-group mb-0">
+						<input class="form-control" type="text" placeholder="Readonly input here..." readonly>
+					</div>
+				</div>
+			</div>
+			<div class="card radius-15">
+				<div class="card-body">
+					<div class="card-title">
+						<h4 class="mb-0">Select Inputs</h4>
+					</div>
+					<hr/>
+					<div class="form-group">
+						<select class="form-control form-control-lg">
+							<option>Large select</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<select class="form-control">
+							<option>Default select</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<select class="form-control form-control-sm">
+							<option>Small select</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="card radius-15">
+				<div class="card-body">
+					<div class="card-title">
+						<h4 class="mb-0">Input Mask</h4>
+					</div>
+					<hr/>
+					<form>
+						<div class="form-group">
+							<label>Date:</label>
+							<input type="date" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>Date time:</label>
+							<input type="datetime-local" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>Email:</label>
+							<input type="email" class="form-control" placeholder="example@gmail.com">
+						</div>
+						<div class="form-group">
+							<label>Password:</label>
+							<input type="password" class="form-control" value="........">
+						</div>
+						<div class="form-group">
+							<label>Input File:</label>
+							<input type="file" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>Month:</label>
+							<input type="month" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>Search:</label>
+							<input type="search" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>Tel:</label>
+							<input type="tel" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>Time:</label>
+							<input type="time" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>Url:</label>
+							<input type="url" class="form-control" placeholder="https://example.com/users/">
+						</div>
+						<div class="form-group">
+							<label>Week:</label>
+							<input type="week" class="form-control">
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="card radius-15">
+				<div class="card-body">
+					<div class="card-title">
+						<h4 class="mb-0">Input Tags</h4>
+					</div>
+					<hr/>
+					<form>
+						<div class="form-group">
+							<label for="formControlRange">Basic</label>
+							<input type="text" data-role="tagsinput" value="jQuery,Script,Net">
+						</div>
+						<div class="form-group">
+							<label for="formControlRange">Multi Select</label>
+							<select multiple data-role="tagsinput">
+								<option value="Amsterdam">Amsterdam</option>
+								<option value="Washington">Washington</option>
+								<option value="Sydney">Sydney</option>
+								<option value="Beijing">Beijing</option>
+								<option value="Cairo">Cairo</option>
+							</select>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="card radius-15">
+				<div class="card-body">
+					<div class="card-title">
+						<h4 class="mb-0">Checkboxes and radios</h4>
+					</div>
+					<hr/>
+					<p>Default (stacked)</p>
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+						<label class="form-check-label" for="defaultCheck1">Default checkbox</label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled="">
+						<label class="form-check-label" for="defaultCheck2">Disabled checkbox</label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked="">
+						<label class="form-check-label" for="exampleRadios1">Default radio</label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+						<label class="form-check-label" for="exampleRadios2">Second default radio</label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" disabled="">
+						<label class="form-check-label" for="exampleRadios3">Disabled radio</label>
+					</div>
+					<p>Inline</p>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+						<label class="form-check-label" for="inlineCheckbox1">1</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+						<label class="form-check-label" for="inlineCheckbox2">2</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" disabled="">
+						<label class="form-check-label" for="inlineCheckbox3">3 (disabled)</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+						<label class="form-check-label" for="inlineRadio1">1</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+						<label class="form-check-label" for="inlineRadio2">2</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" disabled="">
+						<label class="form-check-label" for="inlineRadio3">3 (disabled)</label>
+					</div>
+				</div>
+			</div>
+			<div class="card radius-15">
+				<div class="card-body">
+					<div class="card-title">
+						<h4 class="mb-0">Custom Checkboxes &amp; Radios</h4>
+					</div>
+					<hr/>
+					<div class="custom-control custom-checkbox">
+						<input type="checkbox" class="custom-control-input" id="customCheck1">
+						<label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
+					</div>
+					<hr>
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+						<label class="custom-control-label" for="customRadioInline1">Toggle this custom radio</label>
+					</div>
+					<div class="custom-control custom-radio custom-control-inline">
+						<input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+						<label class="custom-control-label" for="customRadioInline2">Or toggle this other custom radio</label>
+					</div>
+					<hr>
+					<div class="custom-control custom-switch">
+						<input type="checkbox" class="custom-control-input" id="customSwitch1">
+						<label class="custom-control-label" for="customSwitch1">Toggle this switch element</label>
+					</div>
+					<div class="custom-control custom-switch">
+						<input type="checkbox" class="custom-control-input" disabled="" id="customSwitch2">
+						<label class="custom-control-label" for="customSwitch2">Disabled switch element</label>
+					</div>
+				</div>
+			</div>
+			<div class="card radius-15">
+				<div class="card-body">
+					<div class="card-title">
+						<h4 class="mb-0">Range Inputs</h4>
+					</div>
+					<hr/>
+					<form>
+						<div class="form-group">
+							<label for="formControlRange">Example Range input</label>
+							<input type="range" class="form-control-range" id="formControlRange">
+						</div>
+						<div class="form-group">
+							<label for="customRange1">Example range</label>
+							<input type="range" class="custom-range" id="customRange1">
+						</div>
+						<div class="form-group">
+							<label for="customRange2">Example range</label>
+							<input type="range" class="custom-range" min="0" max="5" id="customRange2">
+						</div>
+						<div class="form-group">
+							<label for="customRange3">Example range</label>
+							<input type="range" class="custom-range" min="0" max="5" step="0.5" id="customRange3">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+@section ScriptPage {
+	<script src="~/plugins/input-tags/js/tagsinput.js"></script>
+}

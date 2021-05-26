@@ -14,7 +14,7 @@
             @await Html.PartialAsync("SubscribeFormPartial")
             @await Html.PartialAsync("FooterPartial")
         </div>
-        <a id="back-top" class="back-to-top page-scroll" href="#main"> <i class="ion-ios-arrow-thin-up"></i> </a>
+        <a id="back-top" class="back-to-top page-scroll" asp-controller="Home" asp-action="Index" asp-fragment="main"> <i class="ion-ios-arrow-thin-up"></i> </a>
     </div>
     @await Html.PartialAsync("ScriptsPartial")
 </body>
