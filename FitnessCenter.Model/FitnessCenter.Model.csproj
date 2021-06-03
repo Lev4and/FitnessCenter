@@ -1,7 +1,38 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Database\Migrations\20210603133212_InitDatabase.cs" />
+    <Compile Remove="Database\Migrations\20210603133212_InitDatabase.Designer.cs" />
+    <Compile Remove="Database\Migrations\20210603134940_InitDatabase.cs" />
+    <Compile Remove="Database\Migrations\20210603134940_InitDatabase.Designer.cs" />
+    <Compile Remove="Database\Migrations\20210603135214_InitDatabase.cs" />
+    <Compile Remove="Database\Migrations\20210603135214_InitDatabase.Designer.cs" />
+    <Compile Remove="Database\Migrations\20210603135442_InitDatabase.cs" />
+    <Compile Remove="Database\Migrations\20210603135442_InitDatabase.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Database\Entities\" />
+    <Folder Include="Database\Migrations\" />
+    <Folder Include="Database\Repository\EntityFramework\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.15" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.15" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.15">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.15" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.15">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
 
 </Project>
