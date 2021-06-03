@@ -1,117 +1,108 @@
-// Custom Scripts for Primal Template //
 
-jQuery(function($) {
-    "use strict";
-
-
-        // get the value of the bottom of the #main element by adding the offset of that element plus its height, set it as a variable
-        var mainbottom = $('#main').offset().top;
-
-        // on scroll,
-        $(window).on('scroll',function(){
-
-        // we round here to reduce a little workload
-        stop = Math.round($(window).scrollTop());
-        if (stop > mainbottom) {
-            $('.navbar').addClass('past-main');
-            $('.navbar').addClass('effect-main')
-        } else {
-            $('.navbar').removeClass('past-main');
-       }
-
-      });
+ /* jQuery Pre loader
+  -----------------------------------------------*/
+$(window).load(function(){
+    $('.preloader').fadeOut(1000); // set duration in brackets    
+});
 
 
-  // Collapse navbar on click
+/* HTML document is loaded. DOM is ready. 
+-------------------------------------------*/
+$(document).ready(function() {
 
-   $(document).on('click.nav','.navbar-collapse.in',function(e) {
-    if( $(e.target).is('a') ) {
-    $(this).removeClass('in').addClass('collapse');
-   }
-  });
+  /* template navigation
+  -----------------------------------------------*/
+ $('.main-navigation').onePageNav({
+        scrollThreshold: 0.2, // Adjust if Navigation highlights too early or too late
+        scrollOffset: 75, //Height of Navigation Bar
+        filter: ':not(.external)',
+        changeHash: true
+    }); 
 
-
-
-    /*-----------------------------------
-    ----------- Scroll To Top -----------
-    ------------------------------------*/
-
+    /* Navigation visible on Scroll */
+    mainNav();
     $(window).scroll(function () {
-      if ($(this).scrollTop() > 1000) {
-          $('#back-top').fadeIn();
-      } else {
-          $('#back-top').fadeOut();
-      }
-    });
-    // scroll body to 0px on click
-    $('#back-top').on('click', function () {
-      $('#back-top').tooltip('hide');
-      $('body,html').animate({
-          scrollTop: 0
-      }, 1500);
-      return false;
+        mainNav();
     });
 
+    function mainNav() {
+        var top = (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
+        if (top > 40) $('.sticky-navigation').stop().animate({
+            "opacity": '1',
+            "top": '0'
+        });
+        else $('.sticky-navigation').stop().animate({
+            "opacity": '0',
+            "top": '-75'
+        });
+    }
+    
 
-
-
-
-  /*-------- Owl Carousel ---------- */
-    $(".reviews").owlCarousel({
-
-    slideSpeed : 200,
-    items: 1,
-    singleItem: true,
-    autoPlay : true,
-    pagination : false
+   /* Hide mobile menu after clicking on a link
+    -----------------------------------------------*/
+    $('.navbar-collapse a').click(function(){
+        $(".navbar-collapse").collapse('hide');
     });
 
 
-  /* ------ Clients Section Owl Carousel ----- */
-
-    $(".clients").owlCarousel({
-    slideSpeed : 200,
-    items: 5,
-    singleItem: false,
-    autoPlay : true,
-    pagination : false
+  /*  smoothscroll
+  ----------------------------------------------*/
+   $(function() {
+        $('.navbar-default a, #home a, #overview a').bind('click', function(event) {
+            var $anchor = $(this);
+            $('html, body').stop().animate({
+                scrollTop: $($anchor.attr('href')).offset().top - 49
+            }, 1000);
+            event.preventDefault();
+        });
     });
 
 
-  /* ------ jQuery for Easing min -- */
+ /* Parallax section
+    -----------------------------------------------*/
+  function initParallax() {
+    $('#home').parallax("100%", 0.1);
+    $('#overview').parallax("100%", 0.3);
+    $('#trainer').parallax("100%", 0.2);
+    $('#newsletter').parallax("100%", 0.3);
+    $('#blog').parallax("100%", 0.1);
+    $('#price').parallax("100%", 0.2);
+    $('#testimonial').parallax("100%", 0.2);
 
-    $(function() {
-    $('a.page-scroll').bind('click', function(event) {
-        var $anchor = $(this);
-        $('html, body').stop().animate({
-            scrollTop: $($anchor.attr('href')).offset().top
-        }, 1500, 'easeInOutExpo');
-        event.preventDefault();
+  }
+  initParallax();
+
+
+   /* home slider section
+  -----------------------------------------------*/
+  $(function(){
+    jQuery(document).ready(function() {
+    $('#home').backstretch([
+       "../../images/main/home-bg-slider-img1.jpg", 
+       "../../images/main/home-bg-slider-img2.jpg",
+        ],  {duration: 2000, fade: 750});
+    });
+  })
+
+
+  /* Owl Carousel
+  -----------------------------------------------*/
+  $(document).ready(function() {
+    $("#owl-testimonial").owlCarousel({
+      autoPlay: 6000,
+      items : 1,
+      itemsDesktop : [1199,1],
+      itemsDesktopSmall : [979,1],
+      itemsTablet: [768,1],
+      itemsTabletSmall: false,
+      itemsMobile : [479,1],
     });
   });
 
 
+  /* wow
+  -------------------------------*/
+  new WOW({ mobile: false }).init();
 
-/* --------- Wow Init ------ */
+  });
 
-  new WOW().init();
-
-
-  /* ----- Counter Up ----- */
-
-$('.counter').counterUp({
-		delay: 10,
-		time: 1000
-});
-
-
-/*----- Preloader ----- */
-
-    $(window).load(function() {
-  		setTimeout(function() {
-        $('#loading').fadeOut('slow', function() {
-        });
-      }, 3000);
-    });
-
-});

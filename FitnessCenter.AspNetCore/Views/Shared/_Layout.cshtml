@@ -6,16 +6,13 @@
     @await Html.PartialAsync("IconPartial")
     @await Html.PartialAsync("CssPartial")
 </head>
-<body>
-    <div class="wrapper">
-        @await Html.PartialAsync("NavBarPartial")
-        <div class="main app form" id="main">
-            @RenderBody()
-            @await Html.PartialAsync("SubscribeFormPartial")
-            @await Html.PartialAsync("FooterPartial")
-        </div>
-        <a id="back-top" class="back-to-top page-scroll" asp-controller="Home" asp-action="Index" asp-fragment="main"> <i class="ion-ios-arrow-thin-up"></i> </a>
+<body data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
+    <div class="preloader">
+        <div class="sk-spinner sk-spinner-pulse"></div>
     </div>
+    @await Html.PartialAsync("NavBarPartial")
+    @RenderBody()
+    @await Html.PartialAsync("FooterPartial")
     @await Html.PartialAsync("ScriptsPartial")
 </body>
 </html>

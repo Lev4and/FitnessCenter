@@ -1,12 +1,20 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-@await Html.PartialAsync("MainPartial")
-@await Html.PartialAsync("ClassesPartial")
-@await Html.PartialAsync("FeaturesPartial")
-@await Html.PartialAsync("SplitFeature1Partial")
-@await Html.PartialAsync("SplitFeature2Partial")
-@await Html.PartialAsync("SplitFeature3Partial")
-@await Html.PartialAsync("BoldCallToActionPartial")
-@await Html.PartialAsync("ClientPartial")
-@await Html.PartialAsync("PackagePartial")
+<section id="home" class="parallax-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-1 col-md-10 col-sm-12">
+                <h3 class="wow bounceIn" data-wow-delay="0.9s">Hello! you are welcome to</h3>
+                <h1 class="wow fadeInUp" data-wow-delay="1.6s">Professional<br>Fitness Club</h1>
+                <a href="#overview" class="wow fadeInUp smoothScroll btn btn-default" data-wow-delay="2s">LEARN MORE</a>
+            </div>
+        </div>
+    </div>
+</section>
+@await Html.PartialAsync("OverviewPartial")
+@await Html.PartialAsync("TrainerPartial")
+@await Html.PartialAsync("NewsletterPartial")
+@await Html.PartialAsync("BlogPartial")
+@await Html.PartialAsync("PricePartial")
+@await Html.PartialAsync("TestimonialPartial")
