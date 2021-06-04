@@ -13,14 +13,14 @@ using System.Threading.Tasks;
 namespace FitnessCenter.AspNetCore.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class BlogController : Controller
+    public class ServicesController : Controller
     {
         private readonly IWebHostEnvironment _appEnvironment;
 
         private readonly DataManager _dataManager;
         private readonly UploadFileService _uploadFileService;
 
-        public BlogController(IWebHostEnvironment appEnvironment, DataManager dataManager, UploadFileService uploadFileService)
+        public ServicesController(IWebHostEnvironment appEnvironment, DataManager dataManager, UploadFileService uploadFileService)
         {
             _appEnvironment = appEnvironment;
 
@@ -28,13 +28,11 @@ namespace FitnessCenter.AspNetCore.Areas.Admin.Controllers
             _uploadFileService = uploadFileService;
         }
 
-        [Route("~/Admin/Blog")]
-        [Route("~/Admin/Blog/Index")]
         public IActionResult Index()
         {
-            var viewModel = new BlogViewModel()
+            var viewModel = new ServicesViewModel()
             {
-                Blog = _dataManager.Blog.GetBlog().ToList()
+                Services = _dataManager.Services.GetServices().ToList()
             };
 
             return View(viewModel);
@@ -42,35 +40,50 @@ namespace FitnessCenter.AspNetCore.Areas.Admin.Controllers
 
         public IActionResult Save()
         {
-            return View(new Blog() { CreatedAt = DateTime.Now });
+            var viewModel = new ServiceViewModel()
+            {
+                Service = new Service(),
+                Categories = _dataManager.ServiceCategories.GetServiceCategories().ToList()
+            };
+
+            return View(viewModel);
         }
 
-        [Route("~/Admin/Blog/Save/{id}")]
+        [Route("~/Admin/Services/Save/{id}")]
         public IActionResult Save(Guid id)
         {
-            return View(_dataManager.Blog.GetBlogById(id));
+            var viewModel = new ServiceViewModel()
+            {
+                Service = _dataManager.Services.GetServiceById(id),
+                Categories = _dataManager.ServiceCategories.GetServiceCategories().ToList()
+            };
+
+            return View(viewModel);
         }
 
         [HttpPost]
-        public IActionResult Save(Blog blog)
+        public IActionResult Save(ServiceViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                if (_dataManager.Blog.SaveBlog(blog))
+                if (_dataManager.Services.SaveService(viewModel.Service))
                 {
                     return RedirectToAction("Index");
                 }
+
+                ModelState.AddModelError(nameof(viewModel.Service.CategoryId), "Услуга с такими данными уже существует");
+                ModelState.AddModelError(nameof(viewModel.Service.Name), "Услуга с такими данными уже существует");
             }
 
-            return View(blog);
+            return View(viewModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> UploadCKEditor(IFormFile upload)
         {
-            if(await _uploadFileService.UploadFileAsync(upload, "/images/upload/blog/"))
+            if (await _uploadFileService.UploadFileAsync(upload, "/images/upload/services/"))
             {
-                return new JsonResult(new { uploaded = 1, fileName = upload.FileName, url = $"/images/upload/blog/{upload.FileName}" });
+                return new JsonResult(new { uploaded = 1, fileName = upload.FileName, url = $"/images/upload/services/{upload.FileName}" });
             }
 
             return new JsonResult(new { uploaded = 0 });
@@ -82,15 +95,16 @@ namespace FitnessCenter.AspNetCore.Areas.Admin.Controllers
             var viewModel = new BrowseFilesViewModel()
             {
                 Files = new DirectoryInfo(Path.Combine(Directory.GetCurrentDirectory(), _appEnvironment.WebRootPath,
-                                    @"images\upload\blog")).GetFiles().ToList()
+                                    @"images\upload\services")).GetFiles().ToList()
             };
+
             return View("FileBrowsePartial", viewModel);
         }
 
-        [Route("~/Admin/Blog/Delete/{id}")]
+        [Route("~/Admin/Services/Delete/{id}")]
         public IActionResult Delete(Guid id)
         {
-            _dataManager.Blog.DeleteBlogById(id);
+            _dataManager.Services.DeleteServiceById(id);
 
             return RedirectToAction("Index");
         }

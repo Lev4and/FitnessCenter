@@ -2752,6 +2752,7 @@
     <Folder Include="wwwroot\images\adminpanel\flags" />
     <Folder Include="wwwroot\images\upload\blog\" />
     <Folder Include="wwwroot\images\upload\clients\" />
+    <Folder Include="wwwroot\images\upload\services\" />
     <Folder Include="wwwroot\images\upload\trainers\" />
   </ItemGroup>
 </Project>
