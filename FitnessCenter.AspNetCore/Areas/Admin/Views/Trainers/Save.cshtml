@@ -1,0 +1,164 @@
+﻿@model TrainerViewModel
+@section StylePage
+{
+    <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" asp-append-version="true" />
+    <link rel="stylesheet" type="text/css" href="~/plugins/datatable/css/dataTables.bootstrap4.min.css" asp-append-version="true" />
+    <link rel="stylesheet" type="text/css" href="~/plugins/datatable/css/buttons.bootstrap4.min.css" asp-append-version="true" />
+    <link rel="stylesheet" type="text/css" href="~/plugins/fancy-file-uploader/fancy_fileupload.css" asp-append-version="true" />
+    <link rel="stylesheet" type="text/css" href="~/plugins/Drag-And-Drop/dist/imageuploadify.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/adminpanel/custom.css" asp-append-version="true" />
+}
+<div class="page-wrapper">
+    <div class="page-content-wrapper">
+        <div class="page-content">
+            <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
+                <div class="breadcrumb-title pr-3">База данных</div>
+                <div class="pl-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0 p-0">
+                            <li class="breadcrumb-item">
+                                <a href="javascript:;"><i class='bx bx-home-alt'></i></a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Тренеры</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+            <div class="card radius-15">
+                <div class="card-body">
+                    <div class="card-title">
+                        <h4 class="mb-0">Форма</h4>
+                    </div>
+                    <hr />
+                    <div class="form-body">
+                        <form method="post" action="/Admin/Trainers/Save" enctype="multipart/form-data">
+                            <input type="hidden" asp-for="Trainer.Id" />
+                            <input id="input-hidden-photo-url" type="hidden" asp-for="Trainer.Photo" />
+                            @for (int i = 0; i < Model.Genders.Count; i++)
+                            {
+                                <input type="hidden" asp-for="@Model.Genders[i].Id" />
+                                <input type="hidden" asp-for="@Model.Genders[i].Name" />
+                            }
+                            @for (int i = 0; i < Model.TrainerCategories.Count; i++)
+                            {
+                                <input type="hidden" asp-for="@Model.TrainerCategories[i].Id" />
+                                <input type="hidden" asp-for="@Model.TrainerCategories[i].Name" />
+                            }
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Имя</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" asp-for="Trainer.Name" min="1" required>
+                                    <span class="invalid-feedback" style="display: block;" asp-validation-for="Trainer.Name"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Пол</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" asp-for="Trainer.GenderId" required>
+                                        @foreach (var gender in Model.Genders)
+                                        {
+                                            <option value="@gender.Id">@gender.Name</option>
+                                        }
+                                    </select>
+                                    <span class="invalid-feedback" style="display: block;" asp-validation-for="Trainer.GenderId"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Тренерская категория</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" asp-for="Trainer.CategoryId" required>
+                                        @foreach (var category in Model.TrainerCategories)
+                                        {
+                                            <option value="@category.Id">@category.Name</option>
+                                        }
+                                    </select>
+                                    <span class="invalid-feedback" style="display: block;" asp-validation-for="Trainer.CategoryId"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Дата рождения</label>
+                                <div class="col-sm-10">
+                                    <input type="date" class="form-control" asp-for="Trainer.DateOfBirth" min="1900-01-01" max="@(DateTime.Now.AddYears(-18).ToString("yyyy-MM-dd"))" required>
+                                    <span class="invalid-feedback" style="display: block;" asp-validation-for="Trainer.DateOfBirth"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Фотография</label>
+                                <div class="col-sm-10 form-group-row-container-image">
+                                    <img id="current-photo-image" src="~/@Model.Trainer.Photo" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Загрузка фотографии</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroupFileAddon01">Загрузить</span>
+                                        </div>
+                                        <div class="custom-file">
+                                            <input name="uploadedFile" type="file" accept=".jpg, .png, image/jpeg, image/png" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                                            <label class="custom-file-label" for="inputGroupFile01">Выбрать файл</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Описание</label>
+                                <div class="col-sm-10">
+                                    <textarea id="description-text-area" asp-for="Trainer.Description"></textarea>
+                                    <span class="invalid-feedback" style="display: block;" asp-validation-for="Trainer.Description"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Ссылка на «ВКонтакте»</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" asp-for="Trainer.VKontakteUrl">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Ссылка на «Инстаграм»</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" asp-for="Trainer.InstagramUrl">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label"></label>
+                                <div class="col-sm-10">
+                                    <input type="submit" class="btn btn-light px-4" value="Сохранить" />
+                                    <button id="remove-current-photo-button" type="button" class="btn btn-light px-4">Удалить текущую фотографию</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section ScriptPage {
+    <script src="~/plugins/fancy-file-uploader/jquery.ui.widget.js"></script>
+    <script src="~/plugins/fancy-file-uploader/jquery.fileupload.js"></script>
+    <script src="~/plugins/fancy-file-uploader/jquery.iframe-transport.js"></script>
+    <script src="~/plugins/fancy-file-uploader/jquery.fancy-fileupload.js"></script>
+    <script src="~/plugins/Drag-And-Drop/dist/imageuploadify.min.js"></script>
+    <script src="~/plugins/ckeditor/ckeditor.js" asp-append-version="true"></script>
+    <script>
+        CKEDITOR.replace("Trainer.Description", {
+            height: 400,
+            filebrowserUploadUrl: "/Admin/Trainers/UploadCKEditor",
+            filebrowserBrowseUrl: "/Admin/Trainers/FileBrowse"
+        });
+    </script>
+    <script src="~/js/adminpanel/bs-custom-file-input.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            bsCustomFileInput.init()
+        });
+    </script>
+    <script type="text/javascript">
+        $('#remove-current-photo-button').on('click', function () {
+            $('#current-photo-image').attr('src', '');
+            $('#input-hidden-photo-url').attr('value', '');
+        });
+    </script>
+}
