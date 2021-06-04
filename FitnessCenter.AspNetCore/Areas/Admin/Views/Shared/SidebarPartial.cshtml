@@ -9,31 +9,40 @@
 		<a href="javascript:;" class="toggle-btn ml-auto"> <i class="bx bx-menu"></i>
 		</a>
 	</div>
-	<ul class="metismenu" id="menu">
-		<li>
-			<a href="javascript:;" class="has-arrow">
-				<div class="parent-icon"><i class="bx bx-home-alt"></i>
-				</div>
-				<div class="menu-title">Панель администратора</div>
-			</a>
-			<ul>
-				<li>
-					<a asp-area="Admin" asp-controller="Home" asp-action="Index">
-						<i class="bx bx-right-arrow-alt"></i>Главная
-					</a>
-				</li>
-			</ul>
-		</li>
+    <ul class="metismenu" id="menu">
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon">
+                    <i class="bx bx-home-alt"></i>
+                </div>
+                <div class="menu-title">Панель администратора</div>
+            </a>
+            <ul>
+                <li>
+                    <a asp-area="Admin" asp-controller="Home" asp-action="Index">
+                        <i class="bx bx-right-arrow-alt"></i>Главная
+                    </a>
+                </li>
+            </ul>
+        </li>
         <li class="menu-label">
             База данных
         </li>
-		<li>
-			<a asp-area="Admin" asp-controller="Blog" asp-action="Index">
-				<div class="parent-icon">
-					<i class="bx bx-news"></i>
-				</div>
-				<div class="menu-title">Блог</div>
-			</a>
-		</li>
-	</ul>
+        <li>
+            <a asp-area="Admin" asp-controller="Blog" asp-action="Index">
+                <div class="parent-icon">
+                    <i class="bx bx-news"></i>
+                </div>
+                <div class="menu-title">Блог</div>
+            </a>
+        </li>
+        <li>
+            <a asp-area="Admin" asp-controller="ServiceCategories" asp-action="Index">
+                <div class="parent-icon">
+                    <i class="bx bx-list-ul"></i>
+                </div>
+                <div class="menu-title">Категории услуг</div>
+            </a>
+        </li>
+    </ul>
 </div>
