@@ -44,29 +44,29 @@ namespace FitnessCenter.AspNetCore
                 options.UseSqlServer(DbConfig.ConnectionString);
             });
 
-            //services.AddIdentity<IdentityUser, IdentityRole>(options =>
-            //{
-            //    options.Password.RequireDigit = true;
-            //    options.Password.RequiredLength = 5;
-            //    options.Password.RequireUppercase = true;
-            //    options.Lockout.MaxFailedAccessAttempts = 5;
-            //    options.User.RequireUniqueEmail = true;
-            //    options.SignIn.RequireConfirmedEmail = false;
-            //}).AddEntityFrameworkStores<FitnessCenterDbContext>().AddDefaultTokenProviders();
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 5;
+                options.Password.RequireUppercase = true;
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.User.RequireUniqueEmail = true;
+                options.SignIn.RequireConfirmedEmail = false;
+            }).AddEntityFrameworkStores<FitnessCenterDbContext>().AddDefaultTokenProviders();
 
-            //services.ConfigureApplicationCookie(options =>
-            //{
-            //    options.Cookie.Name = "fitnessCenterAuth";
-            //    options.Cookie.HttpOnly = true;
-            //    options.LoginPath = "/account/login";
-            //    options.AccessDeniedPath = "/account/accessdenied";
-            //    options.SlidingExpiration = true;
-            //});
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.Name = "fitnessCenterAuth";
+                options.Cookie.HttpOnly = true;
+                options.LoginPath = "/account/login";
+                options.AccessDeniedPath = "/account/accessdenied";
+                options.SlidingExpiration = true;
+            });
 
-            //services.AddAuthorization(x =>
-            //{
-            //    x.AddPolicy("AdminArea", policy => { policy.RequireRole("Администратор"); });
-            //});
+            services.AddAuthorization(x =>
+            {
+                //x.AddPolicy("AdminArea", policy => { policy.RequireRole("Администратор"); });
+            });
 
             services.AddControllersWithViews(x =>
             {
@@ -92,17 +92,17 @@ namespace FitnessCenter.AspNetCore
             //app.UseCookiePolicy();
 
             //app.UseAuthentication();
-            //app.UseAuthorization();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapAreaControllerRoute(
                     name: "AdminArea",
                     areaName: "Admin",
                     pattern: "Admin/{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
