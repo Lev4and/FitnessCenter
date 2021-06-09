@@ -60,8 +60,8 @@
                                     <tr>
                                         <td>@service.Name</td>
                                         <td>@service.Price.ToString("C2", new CultureInfo("Ru-ru"))</td>
-                                        <td>@service.Duration</td>
                                         <td>@service.CountUses</td>
+                                        <td>@service.Duration</td>
                                         <td>
                                             <div class="btn-group pull-right">
                                                 <a asp-area="Admin" asp-controller="Services" asp-action="Save" asp-route-id="@service.Id">

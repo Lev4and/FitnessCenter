@@ -15,6 +15,8 @@ namespace FitnessCenter.Model.Database
         public IClientsRepository Clients { get; private set; }
         
         public IGendersRepository Genders { get; private set; }
+
+        public IRolesRepository Roles { get; private set; }
         
         public IServiceCategoriesRepository ServiceCategories { get; private set; }
         
@@ -26,11 +28,13 @@ namespace FitnessCenter.Model.Database
         
         public ITrainersRepository Trainers { get; private set; }
 
+        public IUsersRepository Users { get; private set; }
+
         public DataManager(IBlogCommentAnswersRepository blogCommentAnswers, IBlogCommentsRepository blogComments, 
             IBlogRepository blog, IClientServicesRepository clientServices, IClientsRepository clients, 
-            IGendersRepository genders, IServiceCategoriesRepository serviceCategories, IServicesRepository services, 
-            ITestimonialsRepository testimonials, ITrainerCategoriesRepository trainerCategories, 
-            ITrainersRepository trainers)
+            IGendersRepository genders, IRolesRepository roles, IServiceCategoriesRepository serviceCategories, 
+            IServicesRepository services, ITestimonialsRepository testimonials, ITrainerCategoriesRepository trainerCategories, 
+            ITrainersRepository trainers, IUsersRepository users)
         {
             BlogCommentAnswers = blogCommentAnswers;
             BlogComments = blogComments;
@@ -38,11 +42,13 @@ namespace FitnessCenter.Model.Database
             ClientServices = clientServices;
             Clients = clients;
             Genders = genders;
+            Roles = roles;
             ServiceCategories = serviceCategories;
             Services = services;
             Testimonials = testimonials;
             TrainerCategories = trainerCategories;
             Trainers = trainers;
+            Users = users;
         }
     }
 }

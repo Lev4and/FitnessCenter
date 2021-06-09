@@ -1,0 +1,52 @@
+﻿@model LoginViewModel
+@{
+    ViewData["Title"] = "Вход";
+}
+<div class="wrapper">
+    <div class="section-authentication-login d-flex align-items-center justify-content-center">
+        <div class="row">
+            <div class="col-12 col-lg-10 mx-auto">
+                <div class="card radius-15">
+                    <div class="row no-gutters">
+                        <div class="col-lg-6">
+                            <div class="card-body p-md-5">
+                                <form method="post" asp-area="" asp-controller="Account" asp-action="Login">
+                                    <div class="text-center">
+                                        <img src="~/images/adminpanel/favicon.png" width="80" alt="">
+                                        <h3 class="mt-4 font-weight-bold">Добро пожаловать</h3>
+                                    </div>
+                                    <div class="login-separater text-center">
+                                        <hr />
+                                    </div>
+                                    <div class="form-group mt-4">
+                                        <label>Адрес электронной почты или логин</label>
+                                        <input type="text" class="form-control" placeholder="Введите ваш адрес электронной почты или логин" asp-for="EmailOrLogin" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Пароль</label>
+                                        <input type="password" class="form-control" placeholder="Введите свой пароль" asp-for="Password" />
+                                    </div>
+                                    <div class="btn-group mt-3 w-100">
+                                        <button type="submit" class="btn btn-light btn-block">Войти</button>
+                                        <button type="button" class="btn btn-light">
+                                            <i class="lni lni-arrow-right"></i>
+                                        </button>
+                                    </div>
+                                    <hr>
+                                    <div class="text-center">
+                                        <p class="mb-0">
+                                            Нет учетной записи? <a asp-area="" asp-controller="Account" asp-action="Register">Зарегистрироваться</a>
+                                        </p>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <img src="~/images/adminpanel/login-images/login-frent-img.jpg" class="card-img login-img h-100" alt="...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

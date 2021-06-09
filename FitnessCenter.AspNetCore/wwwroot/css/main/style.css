@@ -541,6 +541,19 @@ a {
   color: #727272;
 }
 
+#blog button,
+#blog input[type=submit] {
+    background: #26253a;
+    border: none;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    height: 65px;
+    margin-top: 42px;
+    transition: all 0.4s ease-in-out;
+}
+
 #blog .blog-image {
   padding: 30px 0px;
 }

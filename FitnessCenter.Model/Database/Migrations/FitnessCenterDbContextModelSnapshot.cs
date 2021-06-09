@@ -134,6 +134,19 @@ namespace FitnessCenter.Model.Database.Migrations
                     b.HasIndex("GenderId");
 
                     b.ToTable("Clients");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("1bdbb176-6ae3-4251-858d-4c16023b7ec7"),
+                            DateOfBirth = new DateTime(1995, 10, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            FirstName = "Екатерина",
+                            GenderId = new Guid("4ffae81a-91f9-4092-910e-b79b6090b753"),
+                            LastName = "Макеева",
+                            MiddleName = "Александровна",
+                            Photo = "upload/clients/1bdbb176-6ae3-4251-858d-4c16023b7ec7/photo.jpg",
+                            UserId = new Guid("69d4573c-6729-4c41-a7a4-b8640c483f5f")
+                        });
                 });
 
             modelBuilder.Entity("FitnessCenter.Model.Database.Entities.ClientService", b =>
@@ -339,9 +352,23 @@ namespace FitnessCenter.Model.Database.Migrations
                         new
                         {
                             Id = "B867520A-92DB-4658-BE39-84DA53A601C0",
-                            ConcurrencyStamp = "0562c701-8fde-4252-acee-c6e8792258dc",
+                            ConcurrencyStamp = "c4903dd5-b13a-4a80-95f9-ecacc21b3d9c",
                             Name = "Администратор",
                             NormalizedName = "АДМИНИСТРАТОР"
+                        },
+                        new
+                        {
+                            Id = "3D2808A4-A723-4072-9110-F6659E3FC6CA",
+                            ConcurrencyStamp = "8899ff93-6fbb-4972-a813-725cd7b75d02",
+                            Name = "Клиент",
+                            NormalizedName = "КЛИЕНТ"
+                        },
+                        new
+                        {
+                            Id = "C994C0E3-605D-4661-85E5-A7409D197696",
+                            ConcurrencyStamp = "41f1a17a-62ae-495c-b948-ae3fa68a1e25",
+                            Name = "Менеджер",
+                            NormalizedName = "МЕНЕДЖЕР"
                         });
                 });
 
@@ -438,17 +465,49 @@ namespace FitnessCenter.Model.Database.Migrations
                         {
                             Id = "21F7B496-C675-4E8A-A34C-FC5EC0762FDB",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c6f48637-25d2-44e8-8303-74d765334ae9",
+                            ConcurrencyStamp = "636b06ad-1f83-4829-8b58-76d52201b124",
                             Email = "ekaterina.arkhireeva.2001@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "EKATERINA.ARKHIREEVA.2001@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAED52SAwxPpjOYUBV1Ba8EmBtVg7mHnvyZtJ4RehKzF03rxRmyFy1yoUTHaTVxJEmqg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDp4mCs+ETrcoewvL16f3+cPH5Hyv9F1ac/3ytoYCUddaCb1QfS0LLIOie5Fj0N/GQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
+                        },
+                        new
+                        {
+                            Id = "2207040A-5BC4-4E9B-9B61-3F9ABAC55656",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "1b8d94ad-5bc2-44c3-908d-e8ffd80a67a4",
+                            Email = "manager@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "MANAGER@GMAIL.COM",
+                            NormalizedUserName = "MANAGER",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMZuKeSUkjrNH4Gq7irDFSuA+bbqknLecGjcGLZ17LLXeTLwby8oByWDk3TJ/lqjOQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "Manager"
+                        },
+                        new
+                        {
+                            Id = "69D4573C-6729-4C41-A7A4-B8640C483F5F",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "ad35be68-1b65-442e-9641-4334246aa4a4",
+                            Email = "client@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "CLIENT@GMAIL.COM",
+                            NormalizedUserName = "CLIENT",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHQ3w74G4YH4VACUwO/miCZZNNnykrVUkj2DcrIb93OEy9sviP3AxEau+hrYVcXBqw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "Client"
                         });
                 });
 
@@ -517,6 +576,16 @@ namespace FitnessCenter.Model.Database.Migrations
                         {
                             UserId = "21F7B496-C675-4E8A-A34C-FC5EC0762FDB",
                             RoleId = "B867520A-92DB-4658-BE39-84DA53A601C0"
+                        },
+                        new
+                        {
+                            UserId = "2207040A-5BC4-4E9B-9B61-3F9ABAC55656",
+                            RoleId = "C994C0E3-605D-4661-85E5-A7409D197696"
+                        },
+                        new
+                        {
+                            UserId = "69D4573C-6729-4C41-A7A4-B8640C483F5F",
+                            RoleId = "3D2808A4-A723-4072-9110-F6659E3FC6CA"
                         });
                 });
 

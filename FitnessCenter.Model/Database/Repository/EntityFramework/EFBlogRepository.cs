@@ -35,11 +35,24 @@ namespace FitnessCenter.Model.Database.Repository.EntityFramework
         {
             if (track)
             {
-                return _context.Blog.SingleOrDefault(blog => blog.Id == id);
+                return _context.Blog
+                    .Include(blog => blog.Comments)
+                        .ThenInclude(comment => comment.Answers)
+                            .ThenInclude(answer => answer.Client)
+                    .Include(blog => blog.Comments)
+                        .ThenInclude(comment => comment.Client)
+                    .SingleOrDefault(blog => blog.Id == id);
             }
             else
             {
-                return _context.Blog.AsNoTracking().SingleOrDefault(blog => blog.Id == id);
+
+                return _context.Blog
+                    .Include(blog => blog.Comments)
+                        .ThenInclude(comment => comment.Answers)
+                            .ThenInclude(answer => answer.Client)
+                    .Include(blog => blog.Comments)
+                        .ThenInclude(comment => comment.Client)
+                    .AsNoTracking().SingleOrDefault(blog => blog.Id == id);
             }
         }
 
@@ -48,11 +61,13 @@ namespace FitnessCenter.Model.Database.Repository.EntityFramework
             if (track)
             {
                 return _context.Blog
+                    .Include(blog => blog.Comments)
                     .OrderByDescending(blog => blog.CreatedAt);
             }
             else
             {
                 return _context.Blog
+                    .Include(blog => blog.Comments)
                     .OrderByDescending(blog => blog.CreatedAt)
                     .AsNoTracking();
             }
@@ -63,6 +78,7 @@ namespace FitnessCenter.Model.Database.Repository.EntityFramework
             if (track)
             {
                 return _context.Blog
+                    .Include(blog => blog.Comments)
                     .OrderByDescending(blog => blog.CreatedAt)
                     .Skip((numberPage - 1) * itemsPerPage)
                     .Take(itemsPerPage);
@@ -70,6 +86,7 @@ namespace FitnessCenter.Model.Database.Repository.EntityFramework
             else
             {
                 return _context.Blog
+                    .Include(blog => blog.Comments)
                     .OrderByDescending(blog => blog.CreatedAt)
                     .Skip((numberPage - 1) * itemsPerPage)
                     .Take(itemsPerPage)

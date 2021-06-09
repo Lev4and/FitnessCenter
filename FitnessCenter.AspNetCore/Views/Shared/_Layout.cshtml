@@ -14,5 +14,9 @@
     @RenderBody()
     @await Html.PartialAsync("FooterPartial")
     @await Html.PartialAsync("ScriptsPartial")
+    @if (IsSectionDefined("ScriptPage"))
+    {
+        @await RenderSectionAsync("ScriptPage")
+    }
 </body>
 </html>

@@ -35,11 +35,17 @@ namespace FitnessCenter.Model.Database.Repository.EntityFramework
         {
             if (track)
             {
-                return _context.ClientServices.SingleOrDefault(service => service.Id == id);
+                return _context.ClientServices
+                    .Include(clientService => clientService.Client).ThenInclude(client => client.Gender)
+                    .Include(clientService => clientService.Service).ThenInclude(service => service.Category)
+                    .SingleOrDefault(service => service.Id == id);
             }
             else
             {
-                return _context.ClientServices.AsNoTracking().SingleOrDefault(service => service.Id == id);
+                return _context.ClientServices
+                    .Include(clientService => clientService.Client).ThenInclude(client => client.Gender)
+                    .Include(clientService => clientService.Service).ThenInclude(service => service.Category)
+                    .AsNoTracking().SingleOrDefault(service => service.Id == id);
             }
         }
 

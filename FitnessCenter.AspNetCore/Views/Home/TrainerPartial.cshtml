@@ -1,61 +1,38 @@
-﻿<section id="trainer" class="parallax-section">
+﻿@model MainViewModel
+<section id="trainer" class="parallax-section">
     <div class="container">
         <div class="row">
             <div class="wow fadeInUp col-md-12 col-sm-12" data-wow-delay="1.3s">
-                <h2>our Trainers</h2>
-                <p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo.</p>
+                <h2>Наши тренеры</h2>
             </div>
-            <div class="wow fadeInUp col-md-4 col-sm-6" data-wow-delay="1.9s">
-                <div class="trainer-thumb">
-                    <img src="~/images/main/trainer-img1.jpg" class="img-responsive" alt="Trainer">
-                    <div class="trainer-overlay">
-                        <div class="trainer-des">
-                            <h2>Jenny</h2>
-                            <h3>Body Trainer</h3>
-                            <ul class="social-icon">
-                                <li><a href="#" class="fa fa-facebook wow fadeInUp" data-wow-delay="1s"></a></li>
-                                <li><a href="#" class="fa fa-twitter wow fadeInUp" data-wow-delay="1.3s"></a></li>
-                                <li><a href="#" class="fa fa-behance wow fadeInUp" data-wow-delay="1.9s"></a></li>
-                            </ul>
+            @if (Model.Trainers != null)
+            {
+                @foreach (var trainer in Model.Trainers)
+                {
+                    <div class="wow fadeInUp col-md-4 col-sm-6" data-wow-delay="1.9s">
+                        <div class="trainer-thumb">
+                            <img src="~/@trainer.Photo" class="img-responsive" alt="Trainer">
+                            <div class="trainer-overlay">
+                                <div class="trainer-des">
+                                    <h2>@trainer.Name</h2>
+                                    <h3>@trainer.Category.Name</h3>
+                                    <h4>Пол: @trainer.Gender.Name</h4>
+                                    <h5>Возраст: @Declension.DeclensionByNumeral(trainer.GetAge(), new string[3] { "год", "года", "лет" }) </h5>
+                                    <ul class="social-icon">
+                                        <li><a href="@trainer.VKontakteUrl" class="fa fa-vk wow fadeInUp" data-wow-delay="1s"></a></li>
+                                        <li><a href="@trainer.InstagramUrl" class="fa fa-instagram wow fadeInUp" data-wow-delay="1.3s"></a></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
+                        <p style=" max-height: 200px; overflow: hidden;">
+                            <div style=" max-height: 200px; overflow: hidden;">
+                                @Html.Raw(trainer.Description)
+                            </div>
+                        </p>
                     </div>
-                </div>
-                <p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo imperdiet, wisi risus purus augue vulputate.</p>
-            </div>
-            <div class="wow fadeInUp col-md-4 col-sm-6" data-wow-delay="2s">
-                <div class="trainer-thumb">
-                    <img src="~/images/main/trainer-img2.jpg" class="img-responsive" alt="Trainer">
-                    <div class="trainer-overlay">
-                        <div class="trainer-des">
-                            <h2>Marry</h2>
-                            <h3>Fitness Trainer</h3>
-                            <ul class="social-icon">
-                                <li><a href="#" class="fa fa-facebook wow fadeInUp" data-wow-delay="1s"></a></li>
-                                <li><a href="#" class="fa fa-twitter wow fadeInUp" data-wow-delay="1.3s"></a></li>
-                                <li><a href="#" class="fa fa-behance wow fadeInUp" data-wow-delay="1.9s"></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo imperdiet, wisi risus purus augue vulputate.</p>
-            </div>
-            <div class="wow fadeInUp col-md-4 col-sm-6" data-wow-delay="2.3s">
-                <div class="trainer-thumb">
-                    <img src="~/images/main/trainer-img3.jpg" class="img-responsive" alt="Trainer">
-                    <div class="trainer-overlay">
-                        <div class="trainer-des">
-                            <h2>Olivia</h2>
-                            <h3>Yoga Teacher</h3>
-                            <ul class="social-icon">
-                                <li><a href="#" class="fa fa-facebook wow fadeInUp" data-wow-delay="1s"></a></li>
-                                <li><a href="#" class="fa fa-twitter wow fadeInUp" data-wow-delay="1.3s"></a></li>
-                                <li><a href="#" class="fa fa-behance wow fadeInUp" data-wow-delay="1.9s"></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <p>Lorem ipsum dolor sit amet, maecenas eget vestibulum justo imperdiet, wisi risus purus augue vulputate.</p>
-            </div>
+                }
+            }
         </div>
     </div>
 </section>

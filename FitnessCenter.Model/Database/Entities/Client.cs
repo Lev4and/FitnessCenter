@@ -33,5 +33,22 @@ namespace FitnessCenter.Model.Database.Entities
         public ICollection<ClientService> Services { get; set; }
 
         public ICollection<BlogCommentAnswer> Answers { get; set; }
+
+        public int GetAge()
+        {
+            if(DateOfBirth < DateTime.Now)
+            {
+                if(DateTime.Now.Year -DateOfBirth.Year > 0)
+                {
+                    return DateTime.Now.Year - DateOfBirth.Year - 1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+
+            return DateTime.Now.Year - DateOfBirth.Year;
+        }
     }
 }

@@ -62,11 +62,20 @@ namespace FitnessCenter.Model.Database.Repository.EntityFramework
         {
             if (track)
             {
-                return _context.Clients.SingleOrDefault(client => client.Id == id);
+                return _context.Clients
+                    .Include(client => client.Gender)
+                    .Include(client => client.Services)
+                    .ThenInclude(clientService => clientService.Service)
+                    .SingleOrDefault(client => client.Id == id);
             }
             else
             {
-                return _context.Clients.AsNoTracking().SingleOrDefault(client => client.Id == id);
+                return _context.Clients
+                    .Include(client => client.Gender)
+                    .Include(client => client.Services)
+                    .ThenInclude(clientService => clientService.Service)
+                    .AsNoTracking()
+                    .SingleOrDefault(client => client.Id == id);
             }
         }
 
@@ -74,11 +83,15 @@ namespace FitnessCenter.Model.Database.Repository.EntityFramework
         {
             if (track)
             {
-                return _context.Clients.SingleOrDefault(client => client.UserId == userId);
+                return _context.Clients
+                    .Include(client => client.Gender)
+                    .SingleOrDefault(client => client.UserId == userId);
             }
             else
             {
-                return _context.Clients.AsNoTracking().SingleOrDefault(client => client.UserId == userId);
+                return _context.Clients
+                    .Include(client => client.Gender)
+                    .AsNoTracking().SingleOrDefault(client => client.UserId == userId);
             }
         }
 

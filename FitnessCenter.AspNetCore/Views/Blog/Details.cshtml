@@ -1,0 +1,92 @@
+﻿@model BlogDetailsViewModel
+@{
+    ViewData["Title"] = Model.Blog.Title;
+}
+<section id="blog-header" class="parallax-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8 col-sm-12">
+                <h3 class="wow bounceIn" data-wow-delay="0.9s">Блог о фитнесе</h3>
+                <h1 class="wow fadeInUp" data-wow-delay="1.6s">Профессиональный клуб</h1>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="blog" class="parallax-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-sm-7">
+                <div class="blog-content wow fadeInUp" data-wow-delay="1s">
+                    <h3>@Model.Blog.Title</h3>
+                    <span class="meta-date"><a href="#">@Model.Blog.CreatedAt.ToLongDateString()</a></span>
+                    <span class="meta-comments"><a href="#blog-comments">@(Model.Blog.Comments != null ? Declension.DeclensionByNumeral(Model.Blog.Comments.Count, new string[3] { "комментарий", "комментария", "комментариев" }) : "0 комментариев")</a></span>
+                    <span class="meta-author"><a href="#blog-author">Администрация</a></span>
+                    <div class="blog-clear"></div>
+                    <p>
+                        <div>
+                            @Html.Raw(Model.Blog.Description)
+                        </div>
+                    </p>
+                </div>
+                <div class="blog-comment wow fadeInUp" data-wow-delay="1s">
+                    <h3>@(Model.Blog.Comments != null ? Declension.DeclensionByNumeral(Model.Blog.Comments.Count, new string[3] { "комментарий", "комментария", "комментариев" }) : "0 комментариев")</h3>
+                    @if (Model.Blog.Comments != null)
+                    {
+                        @foreach (var comment in Model.Blog.Comments)
+                        {
+                            <div class="media" data-comment-id="@comment.Id" onclick="OnSelectedComment(this);">
+                                <div class="media-object pull-left">
+                                    <img src="~/@comment.Client.Photo" style="width: 100px; height: 100px" class="img-responsive img-circle">
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading">@($"{comment.Client.LastName} {comment.Client.FirstName} {comment.Client.MiddleName}")</h4>
+                                    <h5>@comment.WrittenAt.ToLongDateString()</h5>
+                                    <p>@comment.Message</p>
+                                    @if (comment.Answers != null)
+                                    {
+                                        @foreach (var answer in comment.Answers)
+                                        {
+                                            <div class="media">
+                                                <div class="media-object pull-left">
+                                                    <img src="~/@answer.Client.Photo" style="width: 100px; height: 100px" class="img-responsive img-circle">
+                                                </div>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading">@($"{answer.Client.LastName} {answer.Client.FirstName} {answer.Client.MiddleName}")</h4>
+                                                    <h5>@answer.WrittenAt.ToLongDateString()</h5>
+                                                    <p>@answer.Message</p>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        }
+                    }
+                    <div class="blog-comment-form wow fadeInUp" data-wow-delay="1s">
+                        <h3>Оставить комментарий</h3>
+                        <form action="/Blog/SendMessage" method="post" id="comment-form">
+                            <input type="hidden" asp-for="Blog.Id" />
+                            <div class="col-md-6 col-sm-6">
+                                <input id="input-text-comment-id" type="text" class="form-control" placeholder="Кому: " asp-for="CommentId">
+                            </div>
+                            <div class="col-md-12 col-sm-12">
+                                <textarea class="form-control" placeholder="Сообщение" rows="5" name"message" required id="message" asp-for="Message"></textarea>
+                            </div>
+                            <div class="col-md-3 col-sm-3">
+                                <input name="submit" type="submit" class="form-control" id="submit" value="Отправить" @(User.Identity.IsAuthenticated ? "" : "disabled=\"disabled\"")>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section ScriptPage
+{
+    <script type="text/javascript">
+        function OnSelectedComment(element) {
+            $('#input-text-comment-id').attr('value', $(element).attr('data-comment-id'));
+        }
+    </script>
+}

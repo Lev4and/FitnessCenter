@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace FitnessCenter.Model.Database
 {
@@ -54,6 +55,20 @@ namespace FitnessCenter.Model.Database
                 NormalizedName = "АДМИНИСТРАТОР"
             });
 
+            builder.Entity<IdentityRole>().HasData(new IdentityRole
+            {
+                Id = "3D2808A4-A723-4072-9110-F6659E3FC6CA",
+                Name = "Клиент",
+                NormalizedName = "КЛИЕНТ"
+            });
+
+            builder.Entity<IdentityRole>().HasData(new IdentityRole
+            {
+                Id = "C994C0E3-605D-4661-85E5-A7409D197696",
+                Name = "Менеджер",
+                NormalizedName = "МЕНЕДЖЕР"
+            });
+
             builder.Entity<IdentityUser>().HasData(new IdentityUser
             {
                 Id = "21F7B496-C675-4E8A-A34C-FC5EC0762FDB",
@@ -66,10 +81,59 @@ namespace FitnessCenter.Model.Database
                 SecurityStamp = string.Empty
             });
 
+            builder.Entity<IdentityUser>().HasData(new IdentityUser
+            {
+                Id = "2207040A-5BC4-4E9B-9B61-3F9ABAC55656",
+                UserName = "Manager",
+                NormalizedUserName = "MANAGER",
+                Email = "manager@gmail.com",
+                NormalizedEmail = "MANAGER@GMAIL.COM",
+                EmailConfirmed = true,
+                PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null, "Manager"),
+                SecurityStamp = string.Empty
+            });
+
+            builder.Entity<IdentityUser>().HasData(new IdentityUser
+            {
+                Id = "69D4573C-6729-4C41-A7A4-B8640C483F5F",
+                UserName = "Client",
+                NormalizedUserName = "CLIENT",
+                Email = "client@gmail.com",
+                NormalizedEmail = "CLIENT@GMAIL.COM",
+                EmailConfirmed = true,
+                PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null, "Client"),
+                SecurityStamp = string.Empty
+            });
+
             builder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
             {
                 RoleId = "B867520A-92DB-4658-BE39-84DA53A601C0",
                 UserId = "21F7B496-C675-4E8A-A34C-FC5EC0762FDB"
+            });
+
+            builder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                RoleId = "C994C0E3-605D-4661-85E5-A7409D197696",
+                UserId = "2207040A-5BC4-4E9B-9B61-3F9ABAC55656"
+            });
+
+            builder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                RoleId = "3D2808A4-A723-4072-9110-F6659E3FC6CA",
+                UserId = "69D4573C-6729-4C41-A7A4-B8640C483F5F"
+            });
+
+            builder.Entity<Client>().HasData(new Client
+            {
+                Id = Guid.Parse("1BDBB176-6AE3-4251-858D-4C16023B7EC7"),
+                UserId = Guid.Parse("69D4573C-6729-4C41-A7A4-B8640C483F5F"),
+                GenderId = Guid.Parse("4FFAE81A-91F9-4092-910E-B79B6090B753"),
+                Photo = "upload/clients/1bdbb176-6ae3-4251-858d-4c16023b7ec7/photo.jpg",
+                DateOfBirth = new DateTime(1995, 10, 15),
+                MiddleName = "Александровна",
+                FirstName = "Екатерина",
+                LastName = "Макеева"
+
             });
 
             builder.Entity<Blog>()

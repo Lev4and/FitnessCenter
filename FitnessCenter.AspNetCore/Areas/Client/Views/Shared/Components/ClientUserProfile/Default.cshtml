@@ -1,0 +1,27 @@
+﻿@model ClientUserProfileViewModel
+<li class="nav-item dropdown dropdown-user-profile">
+    <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-toggle="dropdown">
+        <div class="media user-box align-items-center">
+            <div class="media-body user-info">
+                <p class="user-name mb-0">@Model.Name</p>
+                <p class="designattion mb-0">@Model.Role</p>
+            </div>
+            <img src="~/@Model.Photo" class="user-img">
+        </div>
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index">
+            <i class="bx bx-home-alt"></i><span>На главную</span>
+        </a>
+        <a class="dropdown-item" asp-area="Client" asp-controller="Account" asp-action="Save">
+            <i class="bx bx-user"></i><span>Аккаунт</span>
+        </a>
+        <a class="dropdown-item" asp-area="Client" asp-controller="Profile" asp-action="Save">
+            <i class="bx bx-user"></i><span>Профиль</span>
+        </a>
+        <div class="dropdown-divider mb-0"></div>
+        <a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">
+            <i class="bx bx-power-off"></i><span>Выход</span>
+        </a>
+    </div>
+</li>

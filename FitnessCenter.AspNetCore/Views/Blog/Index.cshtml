@@ -1,0 +1,35 @@
+﻿@model BlogViewModel
+@{
+    ViewData["Title"] = "Новости";
+}
+<section id="blog-header" class="parallax-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8 col-sm-12">
+                <h3 class="wow bounceIn" data-wow-delay="0.9s">Блог о фитнесе</h3>
+                <h1 class="wow fadeInUp" data-wow-delay="1.6s">Профессиональный клуб</h1>
+            </div>
+        </div>
+    </div>
+</section>
+@if (Model.Blog != null)
+{
+    @foreach (var blog in Model.Blog)
+    {
+        <section id="blog" class="parallax-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-sm-7">
+                        <div class="blog-content wow fadeInUp" data-wow-delay="1s">
+                            <h3><a asp-area="" asp-controller="Blog" asp-action="Details" asp-route-id="@blog.Id">@blog.Title</a></h3>
+                            <span class="meta-date"><a href="#">@blog.CreatedAt.ToLongDateString()</a></span>
+                            <span class="meta-comments"><a href="#blog-comments">@(blog.Comments != null ? Declension.DeclensionByNumeral(blog.Comments.Count, new string[3] { "комментарий", "комментария", "комментариев" }) : "0 комментариев")</a></span>
+                            <span class="meta-author"><a href="#blog-author">Администрация</a></span>
+                            <div class="blog-clear"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+}

@@ -25,8 +25,12 @@ namespace FitnessCenter.AspNetCore
         public void ConfigureServices(IServiceCollection services)
         {
             Configuration.Bind("DbConfig", new DbConfig());
-            
+
+            services.AddTransient<UserManager<IdentityUser>>();
+            services.AddTransient<RoleManager<IdentityRole>>();
             services.AddTransient<IBlogRepository, EFBlogRepository>();
+            services.AddTransient<IRolesRepository, EFRolesRepository>();
+            services.AddTransient<IUsersRepository, EFUsersRepository>();
             services.AddTransient<IClientsRepository, EFClientsRepository>();
             services.AddTransient<IGendersRepository, EFGendersRepository>();
             services.AddTransient<IServicesRepository, EFServicesRepository>();
@@ -65,12 +69,16 @@ namespace FitnessCenter.AspNetCore
 
             services.AddAuthorization(x =>
             {
-                //x.AddPolicy("AdminArea", policy => { policy.RequireRole("Администратор"); });
+                x.AddPolicy("AdminArea", policy => { policy.RequireRole("Администратор"); });
+                x.AddPolicy("ClientArea", policy => { policy.RequireRole("Клиент"); });
+                x.AddPolicy("ManagerArea", policy => { policy.RequireRole("Менеджер"); });
             });
 
             services.AddControllersWithViews(x =>
             {
-                //x.Conventions.Add(new AdminAreaAuthorization("Admin", "AdminArea"));
+                x.Conventions.Add(new AreaAuthorization("Admin", "AdminArea"));
+                x.Conventions.Add(new AreaAuthorization("Client", "ClientArea"));
+                x.Conventions.Add(new AreaAuthorization("Manager", "ManagerArea"));
             }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0).AddSessionStateTempDataProvider();
         }
 
@@ -89,9 +97,9 @@ namespace FitnessCenter.AspNetCore
             app.UseStaticFiles();
 
             app.UseRouting();
-            //app.UseCookiePolicy();
+            app.UseCookiePolicy();
 
-            //app.UseAuthentication();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -100,6 +108,14 @@ namespace FitnessCenter.AspNetCore
                     name: "AdminArea",
                     areaName: "Admin",
                     pattern: "Admin/{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapAreaControllerRoute(
+                    name: "ClientArea",
+                    areaName: "Client",
+                    pattern: "Client/{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapAreaControllerRoute(
+                    name: "ManagerArea",
+                    areaName: "Manager",
+                    pattern: "Manager/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

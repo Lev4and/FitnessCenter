@@ -1,20 +1,21 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model MainViewModel
+@{
+    ViewData["Title"] = "Главная";
 }
 <section id="home" class="parallax-section">
     <div class="container">
         <div class="row">
             <div class="col-md-offset-1 col-md-10 col-sm-12">
-                <h3 class="wow bounceIn" data-wow-delay="0.9s">Hello! you are welcome to</h3>
-                <h1 class="wow fadeInUp" data-wow-delay="1.6s">Professional<br>Fitness Club</h1>
-                <a href="#overview" class="wow fadeInUp smoothScroll btn btn-default" data-wow-delay="2s">LEARN MORE</a>
+                <h3 class="wow bounceIn" data-wow-delay="0.9s">Привет! добро пожаловать в</h3>
+                <h1 class="wow fadeInUp" data-wow-delay="1.6s">Профессиональный<br>Фитнес-центр</h1>
+                <a href="#overview" class="wow fadeInUp smoothScroll btn btn-default" data-wow-delay="2s">УЗНАТЬ БОЛЬШЕ</a>
             </div>
         </div>
     </div>
 </section>
 @await Html.PartialAsync("OverviewPartial")
-@await Html.PartialAsync("TrainerPartial")
+@await Html.PartialAsync("TrainerPartial", Model)
 @await Html.PartialAsync("NewsletterPartial")
-@await Html.PartialAsync("BlogPartial")
-@await Html.PartialAsync("PricePartial")
-@await Html.PartialAsync("TestimonialPartial")
+@await Html.PartialAsync("BlogPartial", Model)
+@await Html.PartialAsync("PricePartial", Model)
+@await Html.PartialAsync("TestimonialPartial", Model)

@@ -6,12 +6,12 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace FitnessCenter.AspNetCore.Services
 {
-    public class AdminAreaAuthorization : IControllerModelConvention
+    public class AreaAuthorization : IControllerModelConvention
     {
         private readonly string _area;
         private readonly string _policy;
 
-        public AdminAreaAuthorization(string area, string policy)
+        public AreaAuthorization(string area, string policy)
         {
             _area = area;
             _policy = policy;

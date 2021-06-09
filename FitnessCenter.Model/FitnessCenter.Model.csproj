@@ -13,15 +13,16 @@
     <Compile Remove="Database\Migrations\20210603135214_InitDatabase.Designer.cs" />
     <Compile Remove="Database\Migrations\20210603135442_InitDatabase.cs" />
     <Compile Remove="Database\Migrations\20210603135442_InitDatabase.Designer.cs" />
+    <Compile Remove="Database\Migrations\20210608165433_AddNewUsers.cs" />
+    <Compile Remove="Database\Migrations\20210608165433_AddNewUsers.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Database\Entities\" />
-    <Folder Include="Database\Migrations\" />
-    <Folder Include="Database\Repository\EntityFramework\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.15">

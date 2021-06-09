@@ -45,13 +45,13 @@ namespace FitnessCenter.Model.Database.Repository.EntityFramework
 
                         return true;
                     }
-                    else
-                    {
-                        _context.Entry(entity).State = EntityState.Modified;
-                        _context.SaveChanges();
+                }
+                else
+                {
+                    _context.Entry(entity).State = EntityState.Modified;
+                    _context.SaveChanges();
 
-                        return true;
-                    }
+                    return true;
                 }
             }
 

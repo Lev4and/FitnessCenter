@@ -19,5 +19,15 @@ namespace FitnessCenter.Model.Database.Entities
         public Client Client { get; set; }
         
         public Service Service { get; set; }
+
+        public bool IsActive()
+        {
+            if(LeftUses == 0 || ExpiratedAt < DateTime.Now)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

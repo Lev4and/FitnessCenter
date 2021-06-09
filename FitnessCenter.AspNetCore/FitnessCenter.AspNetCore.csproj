@@ -5,6 +5,7 @@
   <ItemGroup>
     <PackageReference Include="ckeditor-full" Version="4.16.1" />
     <PackageReference Include="ckeditor-standard" Version="4.16.1" />
+    <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.15">
       <PrivateAssets>all</PrivateAssets>
@@ -2751,7 +2752,6 @@
   <ItemGroup>
     <Folder Include="wwwroot\images\adminpanel\flags" />
     <Folder Include="wwwroot\images\upload\blog\" />
-    <Folder Include="wwwroot\images\upload\clients\" />
     <Folder Include="wwwroot\images\upload\services\" />
     <Folder Include="wwwroot\images\upload\trainers\" />
   </ItemGroup>

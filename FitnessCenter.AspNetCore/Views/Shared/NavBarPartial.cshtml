@@ -6,16 +6,17 @@
                 <span class="icon icon-bar"></span>
                 <span class="icon icon-bar"></span>
             </button>
-            <a href="#" class="navbar-brand">Fitness</a>
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Фитнес-центр</a>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right main-navigation">
-                <li><a href="#home" class="smoothScroll">Home</a></li>
-                <li><a href="#overview" class="smoothScroll">About</a></li>
-                <li><a href="#trainer" class="smoothScroll">Trainers</a></li>
-                <li><a href="#blog" class="smoothScroll">Blog</a></li>
-                <li><a href="#price" class="smoothScroll">Prices</a></li>
-                <li><a href="#testimonial" class="smoothScroll">Testimonials</a></li>
+                <li><a href="#home" class="smoothScroll">Главная</a></li>
+                <li><a href="#overview" class="smoothScroll">О нас</a></li>
+                <li><a href="#trainer" class="smoothScroll">Тренеры</a></li>
+                <li><a href="#blog" class="smoothScroll">Новости</a></li>
+                <li><a href="#price" class="smoothScroll">Услуги</a></li>
+                <li><a href="#testimonial" class="smoothScroll">Отзывы</a></li>
+                @await Component.InvokeAsync("NavBarAccount")
             </ul>
         </div>
     </div>

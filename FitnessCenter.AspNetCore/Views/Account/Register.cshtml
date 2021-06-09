@@ -1,0 +1,143 @@
+﻿@model RegisterViewModel
+@section StylePage
+{
+    <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" asp-append-version="true" />
+    <link rel="stylesheet" type="text/css" href="~/plugins/datatable/css/dataTables.bootstrap4.min.css" asp-append-version="true" />
+    <link rel="stylesheet" type="text/css" href="~/plugins/datatable/css/buttons.bootstrap4.min.css" asp-append-version="true" />
+    <link rel="stylesheet" type="text/css" href="~/plugins/fancy-file-uploader/fancy_fileupload.css" asp-append-version="true" />
+    <link rel="stylesheet" type="text/css" href="~/plugins/Drag-And-Drop/dist/imageuploadify.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/adminpanel/custom.css" asp-append-version="true" />
+}
+@{
+    ViewData["Title"] = "Регистрация";
+}
+<div class="wrapper">
+    <div class="section-authentication-register d-flex align-items-center justify-content-center">
+        <div class="row">
+            <div class="col-12 col-lg-10 mx-auto">
+                <div class="card radius-15">
+                    <div class="row no-gutters">
+                        <div class="col-lg-6">
+                            <div class="card-body p-md-5">
+                                <form method="post" asp-area="" asp-controller="Account" asp-action="Register" enctype="multipart/form-data">
+                                    @for (int i = 0; i < Model.Genders.Count; i++)
+                                    {
+                                        <input type="hidden" asp-for="Genders[i].Id" />
+                                        <input type="hidden" asp-for="Genders[i].Name" />
+                                    }
+                                    <div class="text-center">
+                                        <img src="~/images/adminpanel/favicon.png" width="80" alt="">
+                                        <h3 class="mt-4 font-weight-bold">Завести аккаунт</h3>
+                                    </div>
+                                    <div class="login-separater text-center">
+                                        <hr />
+                                    </div>
+                                    <div class="form-group mt-4">
+                                        <label>Логин</label>
+                                        <input type="text" class="form-control" asp-for="Login" required />
+                                    </div>
+                                    <div class="form-group mt-4">
+                                        <label>Адрес электронной почты</label>
+                                        <input type="text" class="form-control" asp-for="Email" required />
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label>Имя</label>
+                                            <input type="text" class="form-control" asp-for="Client.FirstName" required />
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Фамилия</label>
+                                            <input type="text" class="form-control" asp-for="Client.LastName" required />
+                                        </div>
+                                    </div>
+                                    <div class="form-group mt-4">
+                                        <label>Отчество</label>
+                                        <input type="text" class="form-control" asp-for="Client.MiddleName" />
+                                    </div>
+                                    <div class="form-group mt-4">
+                                        <label>Пол</label>
+                                        <select class="form-control" asp-for="Client.GenderId" required>
+                                            @foreach (var gender in Model.Genders)
+                                            {
+                                                <option value="@gender.Id">@gender.Name</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="form-group mt-4">
+                                        <label>Дата рождения</label>
+                                        <input type="date" class="form-control" asp-for="Client.DateOfBirth" min="1900-01-01" max="@DateTime.Now" required>
+                                    </div>
+                                    <div class="form-group mt-4">
+                                        <label>Номер телефона</label>
+                                        <input type="text" class="form-control" asp-for="Phone" />
+                                    </div>
+                                    <div class="form-group mt-4">
+                                        <label>Загрузка фотографии</label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="inputGroupFileAddon01">Загрузить</span>
+                                            </div>
+                                            <div class="custom-file">
+                                                <input name="uploadedFile" type="file" accept=".jpg, .png, image/jpeg, image/png" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                                                <label class="custom-file-label" for="inputGroupFile01">Выбрать файл</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Пароль</label>
+                                        <div class="input-group" id="show_hide_password">
+                                            <input class="form-control border-right-0" type="password" asp-for="Password" pattern="^.*(?=.{5,})(?=.*\d)(?=.*[!#№$%^&*])(?=.*[a-z])(?=.*[A-Z]).*$" required>
+                                            <div class="input-group-append">
+                                                <a href="javascript:;" class="input-group-text border-left-0"><i class='bx bx-hide'></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group mt-3 w-100">
+                                        <button type="submit" class="btn btn-light btn-block">Зарегистрироваться</button>
+                                        <button type="button" class="btn btn-light">
+                                            <i class="lni lni-arrow-right"></i>
+                                        </button>
+                                    </div>
+                                    <hr />
+                                    <div class="text-center mt-4">
+                                        <p class="mb-0">
+                                            Уже есть аккаунт? <a asp-area="" asp-controller="Account" asp-action="Login">Войти</a>
+                                        </p>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <img src="~/images/adminpanel/login-images/register-frent-img.jpg" class="card-img login-img h-100" alt="...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section ScriptPage{
+    <script src="~/js/adminpanel/jquery.min.js" asp-append-version="true"></script>
+    <script>
+        $(document).ready(function () {
+            $("#show_hide_password a").on('click', function (event) {
+                event.preventDefault();
+                if ($('#show_hide_password input').attr("type") == "text") {
+                    $('#show_hide_password input').attr('type', 'password');
+                    $('#show_hide_password i').addClass("bx-hide");
+                    $('#show_hide_password i').removeClass("bx-show");
+                } else if ($('#show_hide_password input').attr("type") == "password") {
+                    $('#show_hide_password input').attr('type', 'text');
+                    $('#show_hide_password i').removeClass("bx-hide");
+                    $('#show_hide_password i').addClass("bx-show");
+                }
+            });
+        });
+    </script>
+    <script src="~/js/adminpanel/bs-custom-file-input.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            bsCustomFileInput.init()
+        });
+    </script>
+}

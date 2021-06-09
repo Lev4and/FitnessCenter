@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    @await Html.PartialAsync("AccountMetatagsPartial")
+    @await Html.PartialAsync("AccountTitlePartial")
+    @await Html.PartialAsync("AccountIconPartial")
+    @await Html.PartialAsync("AccountCssPartial")
+    @if (IsSectionDefined("StylePage"))
+    {
+        @await RenderSectionAsync("StylePage");
+    }
+
+    <script src="~/js/adminpanel/pace.min.js"></script>
+</head>
+<body class="bg-theme bg-theme1">
+    @RenderBody()
+    @await Html.PartialAsync("AccountScriptsPartial")
+    @if (IsSectionDefined("ScriptPage"))
+    {
+        @await RenderSectionAsync("ScriptPage")
+    }
+</body>
+</html>
