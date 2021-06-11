@@ -29,6 +29,7 @@
                 <div class="card-body">
                     <form method="post" action="/Manager/Clients/AddService">
                         <input type="hidden" asp-for="ClientId" />
+                        <input id="input-hidden-trainer-id" type="hidden" asp-for="TrainerId" />
                         <div class="card-title">
                             <h4 class="mb-0">Услуги</h4>
                         </div>
@@ -53,24 +54,59 @@
                                         <th>Стоимость</th>
                                         <th>Максимальное кол-во использований</th>
                                         <th>Длительность действия (дни)</th>
+                                        <th>Фото тренера</th>
+                                        <th>Имя тренера</th>
                                         <th>Выбрать</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (var service in Model.Services)
                                     {
-                                        <tr>
-                                            <td>@service.Name</td>
-                                            <td>@service.Price.ToString("C2", new CultureInfo("Ru-ru"))</td>
-                                            <td>@service.CountUses</td>
-                                            <td>@service.Duration</td>
-                                            <td>
-                                                <div class="form-check form-check-inline">
-                                                    <input id="inlineRadio" class="form-check-input" type="radio" asp-for="ServiceId" value="@service.Id" />
-                                                    <label class="form-check-label" for="inlineRadio">Выбрать</label>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        @if (service.TrainerServices != null ? service.TrainerServices.Count > 0 : false)
+                                        {
+                                            @foreach (var trainerService in service.TrainerServices)
+                                            {
+                                                <tr>
+                                                    <td>@service.Name</td>
+                                                    <td>@service.Price.ToString("C2", new CultureInfo("Ru-ru"))</td>
+                                                    <td>@service.CountUses</td>
+                                                    <td>@service.Duration</td>
+                                                    <td>
+                                                        <div class="container-image">
+                                                            <img src="~/@trainerService.Trainer.Photo" />
+                                                        </div>
+                                                    </td>
+                                                    <td>@trainerService.Trainer.Name</td>
+                                                    <td>
+                                                        <div class="form-check form-check-inline">
+                                                            <input id="inlineRadio" class="form-check-input" type="radio" data-trainer-id="@trainerService.Trainer.Id" asp-for="ServiceId" value="@service.Id" onclick="OnClickRadion(this);"/>
+                                                            <label class="form-check-label" for="inlineRadio">Выбрать</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td>@service.Name</td>
+                                                <td>@service.Price.ToString("C2", new CultureInfo("Ru-ru"))</td>
+                                                <td>@service.CountUses</td>
+                                                <td>@service.Duration</td>
+                                                <td>
+                                                    <div class="container-image">
+                                                        <img src="~/" />
+                                                    </div>
+                                                </td>
+                                                <td></td>
+                                                <td>
+                                                    <div class="form-check form-check-inline">
+                                                        <input id="inlineRadio" class="form-check-input" type="radio" data-trainer-id="@null" asp-for="ServiceId" value="@service.Id" />
+                                                        <label class="form-check-label" for="inlineRadio">Выбрать</label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
                                     }
                                 </tbody>
                                 <tfoot>
@@ -79,6 +115,8 @@
                                         <th>Стоимость</th>
                                         <th>Максимальное кол-во использований</th>
                                         <th>Длительность действия (дни)</th>
+                                        <th>Фото тренера</th>
+                                        <th>Имя тренера</th>
                                         <th>Выбрать</th>
                                     </tr>
                                 </tfoot>
@@ -96,5 +134,11 @@
         $(document).ready(function () {
             $('#table-services').DataTable();
         });
+
+        function OnClickRadion(element) {
+            if ($(element).prop('checked', 'true')) {
+                $('#input-hidden-trainer-id').attr('value', $(element).attr('data-trainer-id'));
+            }
+        }
     </script>
 }

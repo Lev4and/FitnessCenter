@@ -17,6 +17,8 @@ namespace FitnessCenter.Model.Database
         public DbSet<Client> Clients { get; set; }
         
         public DbSet<ClientService> ClientServices { get; set; }
+
+        public DbSet<Entities.DayOfWeek> DaysOfWeek { get; set; }
         
         public DbSet<Gender> Genders { get; set; }
         
@@ -29,6 +31,10 @@ namespace FitnessCenter.Model.Database
         public DbSet<Trainer> Trainers { get; set; }
         
         public DbSet<TrainerCategory> TrainerCategories { get; set; }
+
+        public DbSet<TrainerSchedule> TrainerSchedules { get; set; }
+
+        public DbSet<TrainerService> TrainerServices { get; set; }
 
         public FitnessCenterDbContext(DbContextOptions<FitnessCenterDbContext> options) : base(options)
         {
@@ -166,6 +172,11 @@ namespace FitnessCenter.Model.Database
                 .WithOne(service => service.Client)
                 .HasForeignKey(service => service.ClientId);
 
+            builder.Entity<Entities.DayOfWeek>()
+                .HasMany(day => day.TrainerSchedules)
+                .WithOne(schedule => schedule.DayOfWeek)
+                .HasForeignKey(schedule => schedule.DayOfWeekId);
+
             builder.Entity<Gender>()
                 .HasMany(gender => gender.Clients)
                 .WithOne(client => client.Gender)
@@ -176,6 +187,21 @@ namespace FitnessCenter.Model.Database
                 .WithOne(trainers => trainers.Gender)
                 .HasForeignKey(trainers => trainers.GenderId);
 
+            builder.Entity<Trainer>()
+                .HasMany(trainer => trainer.ClientServices)
+                .WithOne(clientService => clientService.Trainer)
+                .HasForeignKey(clientService => clientService.TrainerId);
+
+            builder.Entity<Trainer>()
+                .HasMany(trainer => trainer.TrainerServices)
+                .WithOne(trainerService=> trainerService.Trainer)
+                .HasForeignKey(trainerService => trainerService.TrainerId);
+
+            builder.Entity<Trainer>()
+                .HasMany(trainer => trainer.Schedules)
+                .WithOne(schedule => schedule.Trainer)
+                .HasForeignKey(schedule => schedule.TrainerId);
+
             builder.Entity<TrainerCategory>()
                 .HasMany(category => category.Trainers)
                 .WithOne(trainer => trainer.Category)
@@ -185,6 +211,11 @@ namespace FitnessCenter.Model.Database
                 .HasMany(service => service.ClientServices)
                 .WithOne(client => client.Service)
                 .HasForeignKey(client => client.ServiceId);
+
+            builder.Entity<Service>()
+                .HasMany(service => service.TrainerServices)
+                .WithOne(trainerService => trainerService.Service)
+                .HasForeignKey(trainerService => trainerService.ServiceId);
 
             builder.Entity<ServiceCategory>()
                 .HasMany(category => category.Services)

@@ -35,9 +35,12 @@ namespace FitnessCenter.AspNetCore
             services.AddTransient<IGendersRepository, EFGendersRepository>();
             services.AddTransient<IServicesRepository, EFServicesRepository>();
             services.AddTransient<ITrainersRepository, EFTrainersRepository>();
+            services.AddTransient<IDaysOfWeekRepository, EFDaysOfWeekRepository>();
             services.AddTransient<ITestimonialsRepository, EFTestimonialsRepository>();
             services.AddTransient<IBlogCommentsRepository, EFBlogCommentsRepository>();
             services.AddTransient<IClientServicesRepository, EFClientServicesRepository>();
+            services.AddTransient<ITrainerServicesRepository, EFTrainerServicesRepository>();
+            services.AddTransient<ITrainerSchedulesRepository, EFTrainerSchedulesRepository>();
             services.AddTransient<IServiceCategoriesRepository, EFServiceCategoriesRepository>();
             services.AddTransient<ITrainerCategoriesRepository, EFTrainerCategoriesRepository>();
             services.AddTransient<IBlogCommentAnswersRepository, EFBlogCommentAnswersRepository>();

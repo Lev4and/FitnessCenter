@@ -102,6 +102,8 @@
                                     <th>Осталось использований</th>
                                     <th>Дата приобретения</th>
                                     <th>Дата завершения</th>
+                                    <th>Фото тренера</th>
+                                    <th>Имя тренера</th>
                                     <th>Активна</th>
                                     <th>Действия</th>
                                 </tr>
@@ -111,42 +113,48 @@
                                 {
                                     @foreach (var service in Model.Services)
                                     {
-                                        <tr>
-                                            <td>@service.Service.Name</td>
-                                            <td>@service.Service.Price.ToString("C2", new CultureInfo("Ru-ru"))</td>
-                                            <td>@service.LeftUses</td>
-                                            <td>@service.PurchasedAt.ToString("yyyy-MM-dd HH:mm:ss")</td>
-                                            @if (service.ExpiratedAt != null)
-                                            {
-                                                <td>@(((DateTime)service.ExpiratedAt).ToString("yyyy-MM-dd HH:mm:ss"))</td>
-                                            }
-                                            else
-                                            {
-                                                <td>Неизвестно</td>
-                                            }
-                                            <td>@(service.IsActive() ? "Да" : "Нет")</td>
-                                            <td>
-                                                @if (service.IsActive())
-                                                {
-                                                    <div class="btn-group pull-right">
-                                                        <a asp-area="Manager" asp-controller="Clients" asp-action="EditService" asp-route-clientServiceId="@service.Id">
-                                                            <button class="btn btn-sm btn-default">
-                                                                <span class="fa fa-edit">
+                                <tr>
+                                    <td>@service.Service.Name</td>
+                                    <td>@service.Service.Price.ToString("C2", new CultureInfo("Ru-ru"))</td>
+                                    <td>@service.LeftUses</td>
+                                    <td>@service.PurchasedAt.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                                    @if (service.ExpiratedAt != null)
+                                    {
+                                        <td>@(((DateTime)service.ExpiratedAt).ToString("yyyy-MM-dd HH:mm:ss"))</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Неизвестно</td>
+                                    }
+                                    <td>
+                                        <div class="container-image">
+                                            <img src="~/@(service.Trainer != null? service.Trainer.Photo : "")" />
+                                        </div>
+                                    </td>
+                                    <td>@(service.Trainer != null ? service.Trainer.Name : "")</td>
+                                    <td>@(service.IsActive() ? "Да" : "Нет")</td>
+                                    <td>
+                                        @if (service.IsActive())
+                                        {
+                                            <div class="btn-group pull-right">
+                                                <a asp-area="Manager" asp-controller="Clients" asp-action="EditService" asp-route-clientServiceId="@service.Id">
+                                                    <button class="btn btn-sm btn-default">
+                                                        <span class="fa fa-edit">
 
-                                                                </span>
-                                                            </button>
-                                                        </a>
-                                                        <a asp-area="Manager" asp-controller="Clients" asp-action="DeleteService" asp-route-clientId="@Model.Id" asp-route-clientServiceId="@service.Id">
-                                                            <button class="btn btn-sm btn-default">
-                                                                <span class="fa fa-trash">
+                                                        </span>
+                                                    </button>
+                                                </a>
+                                                <a asp-area="Manager" asp-controller="Clients" asp-action="DeleteService" asp-route-clientId="@Model.Id" asp-route-clientServiceId="@service.Id">
+                                                    <button class="btn btn-sm btn-default">
+                                                        <span class="fa fa-trash">
 
-                                                                </span>
-                                                            </button>
-                                                        </a>
-                                                    </div>
-                                                }
-                                            </td>
-                                        </tr>
+                                                        </span>
+                                                    </button>
+                                                </a>
+                                            </div>
+                                        }
+                                    </td>
+                                </tr>
                                     }
                                 }
                             </tbody>
@@ -157,6 +165,8 @@
                                     <th>Осталось использований</th>
                                     <th>Дата приобретения</th>
                                     <th>Дата завершения</th>
+                                    <th>Фото тренера</th>
+                                    <th>Имя тренера</th>
                                     <th>Активна</th>
                                     <th>Действия</th>
                                 </tr>

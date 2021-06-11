@@ -1,0 +1,97 @@
+﻿@model TrainerScheduleViewModel
+@section StylePage
+{
+    <link rel="stylesheet" href="~/css/adminpanel/custom.css" />
+}
+@{
+    ViewData["Title"] = "Сохранение расписание тренера";
+}
+<div class="page-wrapper">
+    <div class="page-content-wrapper">
+        <div class="page-content">
+            <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
+                <div class="breadcrumb-title pr-3">База данных</div>
+                <div class="pl-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0 p-0">
+                            <li class="breadcrumb-item">
+                                <a href="javascript:;"><i class='bx bx-home-alt'></i></a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Расписание тренеров</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+            <div class="card radius-15">
+                <div class="card-body">
+                    <div class="card-title">
+                        <h4 class="mb-0">Форма</h4>
+                    </div>
+                    <hr />
+                    <div class="form-body">
+                        <form method="post" action="/Admin/TrainerSchedules/Save">
+                            <input type="hidden" asp-for="TrainerSchedule.Id" />
+
+                            @for (int i = 0; i < Model.Trainers.Count; i++)
+                            {
+                                <input type="hidden" asp-for="@Model.Trainers[i].Id" />
+                                <input type="hidden" asp-for="@Model.Trainers[i].Name" />
+                                <input type="hidden" asp-for="@Model.Trainers[i].DateOfBirth" />
+                            }
+
+                            @for (int i = 0; i < Model.DaysOfWeek.Count; i++)
+                            {
+                                <input type="hidden" asp-for="@Model.DaysOfWeek[i].Id" />
+                                <input type="hidden" asp-for="@Model.DaysOfWeek[i].Name" />
+                            }
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Тренер</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" asp-for="TrainerSchedule.TrainerId" required>
+                                        @foreach (var trainer in Model.Trainers)
+                                        {
+                                            <option value="@trainer.Id">@trainer.Name @trainer.DateOfBirth</option>
+                                        }
+                                    </select>
+                                    <span class="invalid-feedback" style="display: block;" asp-validation-for="TrainerSchedule.TrainerId"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">День недели</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" asp-for="TrainerSchedule.DayOfWeekId" required>
+                                        @foreach (var dayOfWeek in Model.DaysOfWeek)
+                                        {
+                                            <option value="@dayOfWeek.Id">@dayOfWeek.Name</option>
+                                        }
+                                    </select>
+                                    <span class="invalid-feedback" style="display: block;" asp-validation-for="TrainerSchedule.DayOfWeekId"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Со скольки</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" asp-for="TrainerSchedule.From" min="0" max="23" required>
+                                    <span class="invalid-feedback" style="display: block;" asp-validation-for="TrainerSchedule.From"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Со скольки</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" asp-for="TrainerSchedule.Until" min="0" max="23" required>
+                                    <span class="invalid-feedback" style="display: block;" asp-validation-for="TrainerSchedule.Until"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label"></label>
+                                <div class="col-sm-10">
+                                    <input type="submit" class="btn btn-light px-4" value="Сохранить" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

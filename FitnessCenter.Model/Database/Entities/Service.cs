@@ -10,6 +10,8 @@ namespace FitnessCenter.Model.Database.Entities
         
         public Guid CategoryId { get; set; }
 
+        public bool RequireATrainer { get; set; }
+
         public int Price { get; set; }
         
         public int? Duration { get; set; }
@@ -25,5 +27,7 @@ namespace FitnessCenter.Model.Database.Entities
         public ServiceCategory Category { get; set; }
         
         public ICollection<ClientService> ClientServices { get; set; }
+
+        public ICollection<TrainerService> TrainerServices { get; set; }
     }
 }

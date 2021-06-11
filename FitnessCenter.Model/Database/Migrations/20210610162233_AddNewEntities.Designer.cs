@@ -4,14 +4,16 @@ using FitnessCenter.Model.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FitnessCenter.Model.Database.Migrations
 {
     [DbContext(typeof(FitnessCenterDbContext))]
-    partial class FitnessCenterDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210610162233_AddNewEntities")]
+    partial class AddNewEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

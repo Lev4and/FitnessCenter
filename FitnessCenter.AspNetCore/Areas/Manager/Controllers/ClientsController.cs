@@ -58,6 +58,7 @@ namespace FitnessCenter.AspNetCore.Areas.Manager.Controllers
                     LeftUses = service.CountUses,
                     ClientId = viewModel.ClientId,
                     ServiceId = viewModel.ServiceId,
+                    TrainerId = viewModel.TrainerId,
                     ExpiratedAt = service.Duration != null ? (DateTime?)(DateTime.Now.AddMonths((int)service.Duration)) : null,
                 };
 

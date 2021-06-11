@@ -50,6 +50,7 @@ namespace FitnessCenter.Model.Database.Repository.EntityFramework
                 return _context.Trainers
                     .Include(trainer => trainer.Gender)
                     .Include(trainer => trainer.Category)
+                    .Include(trainer => trainer.Schedules).ThenInclude(schedule => schedule.DayOfWeek)
                     .OrderBy(trainer => trainer.Category.Name)
                     .ThenBy(trainer => trainer.Name);
             }
@@ -58,6 +59,7 @@ namespace FitnessCenter.Model.Database.Repository.EntityFramework
                 return _context.Trainers
                     .Include(trainer => trainer.Gender)
                     .Include(trainer => trainer.Category)
+                    .Include(trainer => trainer.Schedules).ThenInclude(schedule => schedule.DayOfWeek)
                     .OrderBy(trainer => trainer.Category.Name)
                     .ThenBy(trainer => trainer.Name)
                     .AsNoTracking();
@@ -71,6 +73,7 @@ namespace FitnessCenter.Model.Database.Repository.EntityFramework
                 return _context.Trainers
                     .Include(trainer => trainer.Gender)
                     .Include(trainer => trainer.Category)
+                    .Include(trainer => trainer.Schedules).ThenInclude(schedule => schedule.DayOfWeek)
                     .OrderBy(trainer => trainer.Category.Name)
                     .ThenBy(trainer => trainer.Name)
                     .Skip((numberPage - 1) * itemsPerPage)
@@ -81,7 +84,8 @@ namespace FitnessCenter.Model.Database.Repository.EntityFramework
                 return _context.Trainers
                     .Include(trainer => trainer.Gender)
                     .Include(trainer => trainer.Category)
-                    .OrderBy(trainer => trainer.Category.Name)
+                    .Include(trainer => trainer.Schedules).ThenInclude(schedule => schedule.DayOfWeek)
+                    .OrderBy(trainer => trainer.Category.Name)                  
                     .ThenBy(trainer => trainer.Name)
                     .Skip((numberPage - 1) * itemsPerPage)
                     .Take(itemsPerPage)

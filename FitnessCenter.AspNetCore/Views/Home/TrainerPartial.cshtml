@@ -25,9 +25,20 @@
                                 </div>
                             </div>
                         </div>
-                        <p style=" max-height: 200px; overflow: hidden;">
-                            <div style=" max-height: 200px; overflow: hidden;">
+                        <p style=" max-height: auto; overflow: hidden;">
+                            <div style=" max-height: 100%; overflow: hidden;">
+                                <h2>Описание</h2>
                                 @Html.Raw(trainer.Description)
+                                <h2>Расписание</h2>
+                                @if (trainer.Schedules != null)
+                                {
+                                    <ul>
+                                        @foreach (var schedule in trainer.Schedules)
+                                        {
+                                            <li><p style="text-align: left;">@schedule.DayOfWeek.Name - @schedule.From:00 - @schedule.Until:00</p></li>
+                                        }
+                                    </ul>
+                                }
                             </div>
                         </p>
                     </div>

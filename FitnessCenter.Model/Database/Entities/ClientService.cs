@@ -9,6 +9,8 @@ namespace FitnessCenter.Model.Database.Entities
         public Guid ClientId { get; set; }
         
         public Guid ServiceId { get; set; }
+
+        public Guid? TrainerId { get; set; }
         
         public int? LeftUses { get; set; }
 
@@ -17,7 +19,9 @@ namespace FitnessCenter.Model.Database.Entities
         public DateTime PurchasedAt { get; set; }
         
         public Client Client { get; set; }
-        
+
+        public Trainer Trainer { get; set; }
+
         public Service Service { get; set; }
 
         public bool IsActive()

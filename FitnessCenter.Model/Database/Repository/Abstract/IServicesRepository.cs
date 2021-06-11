@@ -13,7 +13,9 @@ namespace FitnessCenter.Model.Database.Repository.Abstract
         Service GetServiceById(Guid id, bool track = false);
 
         IQueryable<Service> GetServices(bool track = false);
-        
+
+        IQueryable<Service> GetServicesWitchRequireATrainer(bool track = false);
+
         IQueryable<Service> GetServices(int itemsPerPage, int numberPage, bool track = false);
 
         void DeleteServiceById(Guid id);

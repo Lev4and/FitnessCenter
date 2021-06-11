@@ -115,6 +115,24 @@
                                     <input type="text" class="form-control" asp-for="Service.Name" readonly>
                                 </div>
                             </div>
+                            @if (Model.Service.RequireATrainer)
+                            {
+                                @if (Model.Trainer != null)
+                                {
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">Тренер</label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control" asp-for="TrainerId" required>
+                                                @foreach (var trainerService in Model.Service.TrainerServices)
+                                                {
+                                                <option value="@trainerService.TrainerId">@trainerService.Trainer.Name @trainerService.Trainer.DateOfBirth</option>
+                                                }
+                                            </select>
+                                            <span class="invalid-feedback" style="display: block;" asp-validation-for="TrainerId"></span>
+                                        </div>
+                                    </div>
+                                }
+                            }
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Осталось использований</label>
                                 <div class="col-sm-10">

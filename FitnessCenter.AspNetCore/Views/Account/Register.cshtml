@@ -10,6 +10,7 @@
 }
 @{
     ViewData["Title"] = "Регистрация";
+    ViewData["PasswordPattern"] = "pattern=\"^.*(?=.{5,})(?=.*\\d)(?=.*[!#№$%^&*])(?=.*[a-z])(?=.*[A-Z]).*$\"";
 }
 <div class="wrapper">
     <div class="section-authentication-register d-flex align-items-center justify-content-center">
@@ -86,10 +87,11 @@
                                     <div class="form-group">
                                         <label>Пароль</label>
                                         <div class="input-group" id="show_hide_password">
-                                            <input class="form-control border-right-0" type="password" asp-for="Password" pattern="^.*(?=.{5,})(?=.*\d)(?=.*[!#№$%^&*])(?=.*[a-z])(?=.*[A-Z]).*$" required>
+                                            <input class="form-control border-right-0" type="password" @ViewData["PasswordPattern"] asp-for="Password" required>
                                             <div class="input-group-append">
                                                 <a href="javascript:;" class="input-group-text border-left-0"><i class='bx bx-hide'></i></a>
                                             </div>
+                                            <label class="col-form-label" style="display: block;">Пароль должен иметь длину не менее 5 символов и содержать: цифры, буквы, строчные буквы и специальные символы (!#№$%^&*)</label>
                                         </div>
                                     </div>
                                     <div class="btn-group mt-3 w-100">

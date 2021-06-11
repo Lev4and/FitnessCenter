@@ -68,13 +68,29 @@
                 <div class="menu-title">Тренеры</div>
             </a>
         </li>
+        <li>
+            <a asp-area="Admin" asp-controller="TrainerSchedules" asp-action="Index">
+                <div class="parent-icon">
+                    <i class="bx bx-time"></i>
+                </div>
+                <div class="menu-title">Расписание тренеров</div>
+            </a>
+        </li>
+        <li>
+            <a asp-area="Admin" asp-controller="TrainerServices" asp-action="Index">
+                <div class="parent-icon">
+                    <i class="bx bx-time"></i>
+                </div>
+                <div class="menu-title">Услуги тренеров</div>
+            </a>
+        </li>
         <li class="menu-label">
             Персонал фитнес-центра
         </li>
         <li>
             <a asp-area="Admin" asp-controller="Staff" asp-action="Index">
                 <div class="parent-icon">
-                    <i class="bx bx-user"></i>
+                    <i class="bx bx-list-ul"></i>
                 </div>
                 <div class="menu-title">Менеджеры</div>
             </a>

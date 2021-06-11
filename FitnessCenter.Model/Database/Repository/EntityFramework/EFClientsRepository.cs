@@ -64,16 +64,16 @@ namespace FitnessCenter.Model.Database.Repository.EntityFramework
             {
                 return _context.Clients
                     .Include(client => client.Gender)
-                    .Include(client => client.Services)
-                    .ThenInclude(clientService => clientService.Service)
+                    .Include(client => client.Services).ThenInclude(clientService => clientService.Service)
+                    .Include(client => client.Services).ThenInclude(clientService => clientService.Trainer)
                     .SingleOrDefault(client => client.Id == id);
             }
             else
             {
                 return _context.Clients
                     .Include(client => client.Gender)
-                    .Include(client => client.Services)
-                    .ThenInclude(clientService => clientService.Service)
+                    .Include(client => client.Services).ThenInclude(clientService => clientService.Service)
+                    .Include(client => client.Services).ThenInclude(clientService => clientService.Trainer)
                     .AsNoTracking()
                     .SingleOrDefault(client => client.Id == id);
             }

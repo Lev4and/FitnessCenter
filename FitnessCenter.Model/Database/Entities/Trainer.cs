@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace FitnessCenter.Model.Database.Entities
@@ -28,6 +30,12 @@ namespace FitnessCenter.Model.Database.Entities
         public Gender Gender { get; set; }
         
         public TrainerCategory Category { get; set; }
+
+        public ICollection<TrainerSchedule> Schedules { get; set; }
+
+        public ICollection<ClientService> ClientServices { get; set; }
+
+        public ICollection<TrainerService> TrainerServices { get; set; }
 
         public int GetAge()
         {

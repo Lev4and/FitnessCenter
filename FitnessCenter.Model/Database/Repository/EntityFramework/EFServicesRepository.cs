@@ -76,12 +76,33 @@ namespace FitnessCenter.Model.Database.Repository.EntityFramework
             if (track)
             {
                 return _context.Services
-                    .Include(service => service.Category);
+                    .Include(service => service.Category)
+                    .Include(service => service.ClientServices)
+                    .Include(service => service.TrainerServices).ThenInclude(trainerService => trainerService.Trainer);
             }
             else
             {
                 return _context.Services
                     .Include(service => service.Category)
+                    .Include(service => service.ClientServices)
+                    .Include(service => service.TrainerServices).ThenInclude(trainerService => trainerService.Trainer)
+                    .AsNoTracking();
+            }
+        }
+
+        public IQueryable<Service> GetServicesWitchRequireATrainer(bool track = false)
+        {
+            if (track)
+            {
+                return _context.Services
+                    .Include(service => service.Category)
+                    .Where(service => service.RequireATrainer == true);
+            }
+            else
+            {
+                return _context.Services
+                    .Include(service => service.Category)
+                    .Where(service => service.RequireATrainer == true)
                     .AsNoTracking();
             }
         }
@@ -92,6 +113,8 @@ namespace FitnessCenter.Model.Database.Repository.EntityFramework
             {
                 return _context.Services
                     .Include(service => service.Category)
+                    .Include(service => service.ClientServices)
+                    .Include(service => service.TrainerServices)
                     .OrderBy(service => service.Name)
                     .Skip((numberPage - 1) * itemsPerPage)
                     .Take(itemsPerPage);
@@ -100,6 +123,8 @@ namespace FitnessCenter.Model.Database.Repository.EntityFramework
             {
                 return _context.Services
                     .Include(service => service.Category)
+                    .Include(service => service.ClientServices)
+                    .Include(service => service.TrainerServices)
                     .OrderBy(service => service.Name)
                     .Skip((numberPage - 1) * itemsPerPage)
                     .Take(itemsPerPage)

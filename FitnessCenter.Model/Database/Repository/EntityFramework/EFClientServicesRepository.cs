@@ -37,7 +37,8 @@ namespace FitnessCenter.Model.Database.Repository.EntityFramework
             {
                 return _context.ClientServices
                     .Include(clientService => clientService.Client).ThenInclude(client => client.Gender)
-                    .Include(clientService => clientService.Service).ThenInclude(service => service.Category)
+                    .Include(clientService => clientService.Service).ThenInclude(service => service.TrainerServices).ThenInclude(trainerService => trainerService.Trainer)
+                    .Include(clientService => clientService.Trainer)
                     .SingleOrDefault(service => service.Id == id);
             }
             else
@@ -45,6 +46,8 @@ namespace FitnessCenter.Model.Database.Repository.EntityFramework
                 return _context.ClientServices
                     .Include(clientService => clientService.Client).ThenInclude(client => client.Gender)
                     .Include(clientService => clientService.Service).ThenInclude(service => service.Category)
+                    .Include(clientService => clientService.Service).ThenInclude(service => service.TrainerServices).ThenInclude(trainerService => trainerService.Trainer)
+                    .Include(clientService => clientService.Trainer)
                     .AsNoTracking().SingleOrDefault(service => service.Id == id);
             }
         }
@@ -55,16 +58,16 @@ namespace FitnessCenter.Model.Database.Repository.EntityFramework
             {
                 return _context.ClientServices
                     .Include(service => service.Service)
-                    .Include(service => service.Client)
-                    .ThenInclude(client => client.Gender)
+                    .Include(service => service.Client).ThenInclude(client => client.Gender)
+                    .Include(clientService => clientService.Trainer)
                     .OrderByDescending(service => service.PurchasedAt);
             }
             else
             {
                 return _context.ClientServices                    
                     .Include(service => service.Service)
-                    .Include(service => service.Client)
-                    .ThenInclude(client => client.Gender)
+                    .Include(service => service.Client).ThenInclude(client => client.Gender)
+                    .Include(clientService => clientService.Trainer)
                     .OrderByDescending(service => service.PurchasedAt)
                     .AsNoTracking();
             }
@@ -76,8 +79,8 @@ namespace FitnessCenter.Model.Database.Repository.EntityFramework
             {
                 return _context.ClientServices
                     .Include(service => service.Service)
-                    .Include(service => service.Client)
-                    .ThenInclude(client => client.Gender)
+                    .Include(service => service.Client).ThenInclude(client => client.Gender)
+                    .Include(clientService => clientService.Trainer)
                     .OrderByDescending(service => service.PurchasedAt)
                     .Skip((numberPerPage - 1) * itemsPerPage)
                     .Take(itemsPerPage);
@@ -86,8 +89,8 @@ namespace FitnessCenter.Model.Database.Repository.EntityFramework
             {
                 return _context.ClientServices                    
                     .Include(service => service.Service)
-                    .Include(service => service.Client)
-                    .ThenInclude(client => client.Gender)
+                    .Include(service => service.Client).ThenInclude(client => client.Gender)
+                    .Include(clientService => clientService.Trainer)
                     .OrderByDescending(service => service.PurchasedAt)
                     .Skip((numberPerPage - 1) * itemsPerPage)
                     .Take(itemsPerPage)
@@ -101,8 +104,8 @@ namespace FitnessCenter.Model.Database.Repository.EntityFramework
             {
                 return _context.ClientServices
                     .Include(service => service.Service)
-                    .Include(service => service.Client)
-                    .ThenInclude(client => client.Gender)
+                    .Include(service => service.Client).ThenInclude(client => client.Gender)
+                    .Include(clientService => clientService.Trainer)
                     .Where(service => service.ClientId == clientId)
                     .OrderByDescending(service => service.PurchasedAt);
             }
@@ -110,8 +113,8 @@ namespace FitnessCenter.Model.Database.Repository.EntityFramework
             {
                 return _context.ClientServices                    
                     .Include(service => service.Service)
-                    .Include(service => service.Client)
-                    .ThenInclude(client => client.Gender)
+                    .Include(service => service.Client).ThenInclude(client => client.Gender)
+                    .Include(clientService => clientService.Trainer)
                     .Where(service => service.ClientId == clientId)
                     .OrderByDescending(service => service.PurchasedAt)
                     .AsNoTracking();
@@ -124,8 +127,8 @@ namespace FitnessCenter.Model.Database.Repository.EntityFramework
             {
                 return _context.ClientServices
                     .Include(service => service.Service)
-                    .Include(service => service.Client)
-                    .ThenInclude(client => client.Gender)
+                    .Include(service => service.Client).ThenInclude(client => client.Gender)
+                    .Include(clientService => clientService.Trainer)
                     .Where(service => service.ClientId == clientId)
                     .OrderByDescending(service => service.PurchasedAt)
                     .Skip((numberPerPage - 1) * itemsPerPage)
@@ -135,8 +138,8 @@ namespace FitnessCenter.Model.Database.Repository.EntityFramework
             {
                 return _context.ClientServices                    
                     .Include(service => service.Service)
-                    .Include(service => service.Client)
-                    .ThenInclude(client => client.Gender)
+                    .Include(service => service.Client).ThenInclude(client => client.Gender)
+                    .Include(clientService => clientService.Trainer)
                     .Where(service => service.ClientId == clientId)
                     .OrderByDescending(service => service.PurchasedAt)
                     .Skip((numberPerPage - 1) * itemsPerPage)

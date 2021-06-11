@@ -37,6 +37,8 @@
                                 <tr>
                                     <th>Наименование</th>
                                     <th>Стоимость</th>
+                                    <th>Фото тренера</th>
+                                    <th>Имя тренера</th>
                                     <th>Осталось использований</th>
                                     <th>Дата приобретения</th>
                                     <th>Дата завершения</th>
@@ -49,6 +51,12 @@
                                     <tr>
                                         <td>@service.Service.Name</td>
                                         <td>@service.Service.Price.ToString("C2", new CultureInfo("Ru-ru"))</td>
+                                        <td>
+                                            <div class="container-image">
+                                                <img src="~/@(service.Trainer != null? service.Trainer.Photo : "")" />
+                                            </div>
+                                        </td>
+                                        <td>@(service.Trainer != null ? service.Trainer.Name : "")</td>
                                         <td>@service.LeftUses</td>
                                         <td>@service.PurchasedAt.ToString("yyyy-MM-dd HH:mm:ss")</td>
                                         @if (service.ExpiratedAt != null)
@@ -67,6 +75,8 @@
                                 <tr>
                                     <th>Наименование</th>
                                     <th>Стоимость</th>
+                                    <th>Фото тренера</th>
+                                    <th>Имя тренера</th>
                                     <th>Осталось использований</th>
                                     <th>Дата приобретения</th>
                                     <th>Дата завершения</th>
