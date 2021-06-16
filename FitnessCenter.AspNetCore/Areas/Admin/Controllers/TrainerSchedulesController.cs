@@ -61,6 +61,16 @@ namespace FitnessCenter.AspNetCore.Areas.Admin.Controllers
                 {
                     return RedirectToAction("Index");
                 }
+                else
+                {
+                    ModelState.AddModelError("TrainerSchedule.TrainerId", "Данный тренер уже имеет расписание за указанный день недели");
+                    ModelState.AddModelError("TrainerSchedule.DayOfWeekId", "Данный тренер уже имеет расписание за указанный день недели");
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("TrainerSchedule.From", "Значение «Со скольки» не может быть больше или равно значению «До скольки»");
+                ModelState.AddModelError("TrainerSchedule.Until", "Значение «Со скольки» не может быть больше или равно значению «До скольки»");
             }
 
             return View(viewModel);
