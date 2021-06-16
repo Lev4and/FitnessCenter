@@ -59,6 +59,11 @@ namespace FitnessCenter.AspNetCore.Areas.Admin.Controllers
             {
                 return RedirectToAction("Index");
             }
+            else
+            {
+                ModelState.AddModelError("TrainerService.TrainerId", "Данный тренер уже предоставляет указанную услугу");
+                ModelState.AddModelError("TrainerService.ServiceId", "Данный тренер уже предоставляет указанную услугу");
+            }
 
             return View(viewModel);
         }
