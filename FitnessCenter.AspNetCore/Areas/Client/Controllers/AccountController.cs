@@ -1,7 +1,9 @@
 ﻿using FitnessCenter.AspNetCore.Models;
+using FitnessCenter.AspNetCore.Services;
 using FitnessCenter.Model.Database;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.RegularExpressions;
 
 namespace FitnessCenter.AspNetCore.Areas.Client.Controllers
 {
@@ -34,13 +36,29 @@ namespace FitnessCenter.AspNetCore.Areas.Client.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (_dataManager.Users.SaveUser(viewModel.Client, _dataManager.Roles.GetRoleByName("Клиент"), viewModel.CurrentPassword, viewModel.NewPassword))
+                if (!Regex.IsMatch(viewModel.CurrentPassword, PasswordValidateConfig.Pattern))
                 {
-                    return RedirectToAction("Index");
+                    ModelState.AddModelError("CurrentPassword", "Пароль не соответствует формату");
                 }
 
-                ModelState.AddModelError(nameof(viewModel.Client.Email), "Пользователь с таким email уже существует");
-                ModelState.AddModelError(nameof(viewModel.Client.UserName), "Пользователь с таким логином уже существует");
+                if (!string.IsNullOrEmpty(viewModel.Client.PasswordHash))
+                {
+                    if (!Regex.IsMatch(viewModel.NewPassword, PasswordValidateConfig.Pattern))
+                    {
+                        ModelState.AddModelError("NewPassword", "Пароль не соответствует формату");
+                    }
+                }
+
+                if (ModelState.ErrorCount == 0)
+                {
+                    if (_dataManager.Users.SaveUser(viewModel.Client, _dataManager.Roles.GetRoleByName("Клиент"), viewModel.CurrentPassword, viewModel.NewPassword))
+                    {
+                        return RedirectToAction("Index");
+                    }
+
+                    ModelState.AddModelError(nameof(viewModel.Client.Email), "Пользователь с таким email уже существует");
+                    ModelState.AddModelError(nameof(viewModel.Client.UserName), "Пользователь с таким логином уже существует");
+                }
             }
 
             return View(viewModel);

@@ -1,10 +1,12 @@
 ﻿using FitnessCenter.AspNetCore.Models;
+using FitnessCenter.AspNetCore.Services;
 using FitnessCenter.Model.Database;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace FitnessCenter.AspNetCore.Areas.Admin.Controllers
 {
@@ -58,13 +60,29 @@ namespace FitnessCenter.AspNetCore.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                if(_dataManager.Users.SaveUser(viewModel.Manager, _dataManager.Roles.GetRoleByName("Менеджер"), viewModel.CurrentPassword, viewModel.NewPassword))
+                if (!Regex.IsMatch(viewModel.CurrentPassword, PasswordValidateConfig.Pattern))
                 {
-                    return RedirectToAction("Index");
+                    ModelState.AddModelError("CurrentPassword", "Пароль не соответствует формату");
                 }
 
-                ModelState.AddModelError(nameof(viewModel.Manager.Email), "Пользователь с таким email уже существует");
-                ModelState.AddModelError(nameof(viewModel.Manager.UserName), "Пользователь с таким логином уже существует");
+                if (!string.IsNullOrEmpty(viewModel.Manager.PasswordHash))
+                {
+                    if (!Regex.IsMatch(viewModel.NewPassword, PasswordValidateConfig.Pattern))
+                    {
+                        ModelState.AddModelError("NewPassword", "Пароль не соответствует формату");
+                    }
+                }
+
+                if(ModelState.ErrorCount == 0)
+                {
+                    if (_dataManager.Users.SaveUser(viewModel.Manager, _dataManager.Roles.GetRoleByName("Менеджер"), viewModel.CurrentPassword, viewModel.NewPassword))
+                    {
+                        return RedirectToAction("Index");
+                    }
+
+                    ModelState.AddModelError("Manager.Email", "Пользователь с таким email уже существует");
+                    ModelState.AddModelError("Manager.UserName", "Пользователь с таким логином уже существует");
+                }
             }
 
             return View(viewModel);

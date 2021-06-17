@@ -10,7 +10,7 @@
 }
 @{
     ViewData["Title"] = "Регистрация";
-    ViewData["PasswordPattern"] = "pattern=\"^.*(?=.{5,})(?=.*\\d)(?=.*[!#№$%^&*])(?=.*[a-z])(?=.*[A-Z]).*$\"";
+    ViewData["PasswordPattern"] = $"pattern={@"^.*(?=.{5,})(?=.*\\d)(?=.*[!#№$%^&*])(?=.*[a-z])(?=.*[A-Z]).*$\"}";
 }
 <div class="wrapper">
     <div class="section-authentication-register d-flex align-items-center justify-content-center">
@@ -36,24 +36,29 @@
                                     <div class="form-group mt-4">
                                         <label>Логин</label>
                                         <input type="text" class="form-control" asp-for="Login" required />
+                                        <span class="invalid-feedback" style="display: block;" asp-validation-for="Login"></span>
                                     </div>
                                     <div class="form-group mt-4">
                                         <label>Адрес электронной почты</label>
                                         <input type="text" class="form-control" asp-for="Email" required />
+                                        <span class="invalid-feedback" style="display: block;" asp-validation-for="Email"></span>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label>Имя</label>
                                             <input type="text" class="form-control" asp-for="Client.FirstName" required />
+                                            <span class="invalid-feedback" style="display: block;" asp-validation-for="Client.FirstName"></span>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label>Фамилия</label>
                                             <input type="text" class="form-control" asp-for="Client.LastName" required />
+                                            <span class="invalid-feedback" style="display: block;" asp-validation-for="Client.LastName"></span>
                                         </div>
                                     </div>
                                     <div class="form-group mt-4">
                                         <label>Отчество</label>
                                         <input type="text" class="form-control" asp-for="Client.MiddleName" />
+                                        <span class="invalid-feedback" style="display: block;" asp-validation-for="Client.MiddleName"></span>
                                     </div>
                                     <div class="form-group mt-4">
                                         <label>Пол</label>
@@ -63,14 +68,17 @@
                                                 <option value="@gender.Id">@gender.Name</option>
                                             }
                                         </select>
+                                        <span class="invalid-feedback" style="display: block;" asp-validation-for="Client.GenderId"></span>
                                     </div>
                                     <div class="form-group mt-4">
                                         <label>Дата рождения</label>
                                         <input type="date" class="form-control" asp-for="Client.DateOfBirth" min="1900-01-01" max="@DateTime.Now" required>
+                                        <span class="invalid-feedback" style="display: block;" asp-validation-for="Client.DateOfBirth"></span>
                                     </div>
                                     <div class="form-group mt-4">
                                         <label>Номер телефона</label>
                                         <input type="text" class="form-control" asp-for="Phone" />
+                                        <span class="invalid-feedback" style="display: block;" asp-validation-for="Phone"></span>
                                     </div>
                                     <div class="form-group mt-4">
                                         <label>Загрузка фотографии</label>
@@ -87,11 +95,12 @@
                                     <div class="form-group">
                                         <label>Пароль</label>
                                         <div class="input-group" id="show_hide_password">
-                                            <input class="form-control border-right-0" type="password" @ViewData["PasswordPattern"] asp-for="Password" required>
+                                            <input class="form-control border-right-0" type="password" asp-for="Password" required>
                                             <div class="input-group-append">
                                                 <a href="javascript:;" class="input-group-text border-left-0"><i class='bx bx-hide'></i></a>
                                             </div>
                                             <label class="col-form-label" style="display: block;">Пароль должен иметь длину не менее 5 символов и содержать: цифры, буквы, строчные буквы и специальные символы (!#№$%^&*)</label>
+                                            <span class="invalid-feedback" style="display: block;" asp-validation-for="Password"></span>
                                         </div>
                                     </div>
                                     <div class="btn-group mt-3 w-100">

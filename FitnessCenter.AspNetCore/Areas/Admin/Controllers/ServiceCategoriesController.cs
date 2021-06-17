@@ -50,7 +50,7 @@ namespace FitnessCenter.AspNetCore.Areas.Admin.Controllers
                     return RedirectToAction("Index");
                 }
 
-                ModelState.AddModelError(nameof(serviceCategory.Name), "Неверное наименование");
+                ModelState.AddModelError("Name", "Категория услуг с такими данными уже существует");
             }
 
             return View(serviceCategory);

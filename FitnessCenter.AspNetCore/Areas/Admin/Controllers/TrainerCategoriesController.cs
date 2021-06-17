@@ -48,7 +48,7 @@ namespace FitnessCenter.AspNetCore.Areas.Admin.Controllers
                     return RedirectToAction("Index");
                 }
 
-                ModelState.AddModelError(nameof(viewModel.Name), "Категория тренера с такими данными уже существует");
+                ModelState.AddModelError("Name", "Категория тренера с такими данными уже существует");
             }
 
             return View(viewModel);

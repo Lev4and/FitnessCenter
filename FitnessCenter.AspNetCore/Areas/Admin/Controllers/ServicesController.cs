@@ -71,8 +71,8 @@ namespace FitnessCenter.AspNetCore.Areas.Admin.Controllers
                     return RedirectToAction("Index");
                 }
 
-                ModelState.AddModelError(nameof(viewModel.Service.CategoryId), "Услуга с такими данными уже существует");
-                ModelState.AddModelError(nameof(viewModel.Service.Name), "Услуга с такими данными уже существует");
+                ModelState.AddModelError("Service.CategoryId", "Услуга с такими данными уже существует");
+                ModelState.AddModelError("Service.Name", "Услуга с такими данными уже существует");
             }
 
             return View(viewModel);

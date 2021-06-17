@@ -48,6 +48,7 @@
                             <thead>
                                 <tr>
                                     <th>Наименование</th>
+                                    <th>Категория</th>
                                     <th>Стоимость</th>
                                     <th>Требует тренерство</th>
                                     <th>Максимальное кол-во использований</th>
@@ -60,6 +61,7 @@
                                 {
                                     <tr>
                                         <td>@service.Name</td>
+                                        <td>@service.Category.Name</td>
                                         <td>@service.Price.ToString("C2", new CultureInfo("Ru-ru"))</td>
                                         <td>@(service.RequireATrainer ? "Да" : "Нет")</td>
                                         <td>@service.CountUses</td>
@@ -88,6 +90,7 @@
                             <tfoot>
                                 <tr>
                                     <th>Наименование</th>
+                                    <th>Категория</th>
                                     <th>Стоимость</th>
                                     <th>Требует тренерство</th>
                                     <th>Максимальное кол-во использований</th>

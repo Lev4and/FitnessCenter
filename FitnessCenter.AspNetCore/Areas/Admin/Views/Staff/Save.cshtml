@@ -5,7 +5,6 @@
 }
 @{
     ViewData["Title"] = "Сохранение менеджера";
-    ViewData["PasswordPattern"] = "pattern=\"^.*(?=.{5,})(?=.*\\d)(?=.*[!#№$%^&*])(?=.*[a-z])(?=.*[A-Z]).*$\"";
 }
 <div class="page-wrapper">
     <div class="page-content-wrapper">
@@ -42,20 +41,21 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Пароль</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" @(string.IsNullOrEmpty(Model.Manager.PasswordHash) ? ViewData["PasswordPattern"] : "") asp-for="CurrentPassword" required>
+                                    <input type="text" class="form-control" asp-for="CurrentPassword" required>
+                                    <label class="col-form-label" style="display: block;">Пароль должен иметь длину не менее 5 символов и содержать: цифры, буквы, строчные буквы и специальные символы (!#№$%^&*)</label>
+                                    <span class="invalid-feedback" style="display: block;" asp-validation-for="CurrentPassword"></span>
                                 </div>
-                                <label class="col-form-label" style="display: block;">Пароль должен иметь длину не менее 5 символов и содержать: цифры, буквы, строчные буквы и специальные символы (!#№$%^&*)</label>
                             </div>
                             @if (!string.IsNullOrEmpty(Model.Manager.PasswordHash))
                             {
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Новый пароль</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" @ViewData["PasswordPattern"] asp-for="NewPassword" required>
-                                <span class="invalid-feedback" style="display: block;" asp-validation-for="NewPassword"></span>
-                            </div>
-                            <label class="col-form-label" style="display: block;">Пароль должен иметь длину не менее 5 символов и содержать: цифры, буквы, строчные буквы и специальные символы (!#№$%^&*)</label>
-                        </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Новый пароль</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" asp-for="NewPassword" required>
+                                        <label class="col-form-label" style="display: block;">Пароль должен иметь длину не менее 5 символов и содержать: цифры, буквы, строчные буквы и специальные символы (!#№$%^&*)</label>
+                                        <span class="invalid-feedback" style="display: block;" asp-validation-for="NewPassword"></span>
+                                    </div>
+                                </div>
                             }
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Электронная почта</label>

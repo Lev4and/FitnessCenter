@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace FitnessCenter.AspNetCore.Controllers
@@ -48,34 +49,57 @@ namespace FitnessCenter.AspNetCore.Controllers
         [HttpPost]
         public IActionResult Register(RegisterViewModel viewModel, IFormFile uploadedFile)
         {
-            if(!_dataManager.Users.ContainsUserByEmail(viewModel.Email) && !_dataManager.Users.ContainsUserByEmail(viewModel.Login))
+            if(!_dataManager.Users.ContainsUserByEmail(viewModel.Email))
             {
-                var user = new IdentityUser()
+                if (!_dataManager.Users.ContainsUserByName(viewModel.Login))
                 {
-                    Email = viewModel.Email,
-                    UserName = viewModel.Login,
-                    PhoneNumber = viewModel.Phone
-                };
-
-                if(_dataManager.Users.SaveUser(user, _dataManager.Roles.GetRoleByName("Клиент"), viewModel.Password, ""))
-                {
-                    viewModel.Client.UserId = Guid.Parse(user.Id);
-
-                    if (_dataManager.Clients.SaveClient(viewModel.Client))
+                    if(Regex.IsMatch(viewModel.Password, PasswordValidateConfig.Pattern))
                     {
-                        if (uploadedFile != null)
+                        var user = new IdentityUser()
                         {
-                            if (_uploadFileService.UploadFileAsync(uploadedFile, $"images/upload/clients/{viewModel.Client.Id}").Result)
+                            Email = viewModel.Email,
+                            UserName = viewModel.Login,
+                            PhoneNumber = viewModel.Phone
+                        };
+
+                        if (_dataManager.Users.SaveUser(user, _dataManager.Roles.GetRoleByName("Клиент"), viewModel.Password, ""))
+                        {
+                            viewModel.Client.UserId = Guid.Parse(user.Id);
+
+                            if (_dataManager.Clients.SaveClient(viewModel.Client))
                             {
-                                viewModel.Client.Photo = $"images/upload/clients/{viewModel.Client.Id}/{uploadedFile.FileName}";
+                                if (uploadedFile != null)
+                                {
+                                    if (_uploadFileService.UploadFileAsync(uploadedFile, $"images/upload/clients/{viewModel.Client.Id}").Result)
+                                    {
+                                        viewModel.Client.Photo = $"images/upload/clients/{viewModel.Client.Id}/{uploadedFile.FileName}";
+                                    }
+                                }
+
+                                _dataManager.Clients.SaveClient(viewModel.Client);
+
+                                return RedirectToAction("Login");
                             }
                         }
-
-                        _dataManager.Clients.SaveClient(viewModel.Client);
-
-                        return RedirectToAction("Login");
+                        else
+                        {
+                            ModelState.AddModelError("Login", "Логин имеет неверный формат");
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Password", "Пароль не соответствует требованиям");
                     }
                 }
+                else
+                {
+                    ModelState.AddModelError("Login", "Пользователь с таким логином уже существует");
+                }
+               
+            }
+            else
+            {
+                ModelState.AddModelError("Email", "Пользователь с таким адресом электронной почты уже существует");
             }
 
             return View(viewModel);
@@ -102,24 +126,24 @@ namespace FitnessCenter.AspNetCore.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError(nameof(LoginViewModel.Password), "Неверный пароль");
+                        ModelState.AddModelError("Password", "Неверный пароль");
                     }
                 }
                 else
                 {
                     if(userEmail == null && userName == null)
                     {
-                        ModelState.AddModelError(nameof(LoginViewModel.EmailOrLogin), "Введен неверный адрес электронной почты или логин");
+                        ModelState.AddModelError("EmailOrLogin", "Введен неверный адрес электронной почты или логин");
                     }
                     else
                     {
                         if (userEmail == null)
                         {
-                            ModelState.AddModelError(nameof(LoginViewModel.EmailOrLogin), "Введен неверный адрес электронной почты");
+                            ModelState.AddModelError("EmailOrLogin", "Введен неверный адрес электронной почты");
                         }
                         else
                         {
-                            ModelState.AddModelError(nameof(LoginViewModel.EmailOrLogin), "Введен неверный логин");
+                            ModelState.AddModelError("EmailOrLogin", "Введен неверный логин");
                         }
                     }
                 }
